@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<aside class="large-12 columns" style="height: 40px; background-color: #f2f2f2; padding: 5px;">
+	<nav>
+		<dl class="sub-nav"> 
+			<dt>Options:</dt> 
+			<dd class="active"><a href="#">See All</a></dd> 
+			<dd><a href={{ url_for('register_client') }}>Add New</a></dd>
+		</dl>
+	</nav>
+</aside>
+
+<section class="row">
+	<header>
+		<h1>All Clients</h1>
+		<h3 class="subheader">Check and manage your clients</h3>
+	</header>
+	{% if clients %}
+	<table style="width: 100%;">
+		<thead>
+			<tr>
+				<th class="text-center">Name</th>
+				<th class="text-center">Company</th>
+				<th class="text-center">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for client in clients %}
+			<tr>
+				<td>{{ client.name }}</td>
+				<td>{{ client.company }}</td>
+				<td class="text-center">
+					<a href={{ url_for('show_client', id=client.id) }}><i class="fi-zoom-in"></i></a>
+					<a href={{ url_for('edit_client', id=client.id) }}><i class="fi-pencil"></i></a>
+					<a href={{ url_for('delete_client', id=client.id) }}><i class="fi-trash"></i></a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<div class="panel text-center">Ops! No clients yet :(</div>
+	{% endif %}
+</section>
+{% endblock %}

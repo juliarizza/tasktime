@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<aside class="large-12 columns" style="height: 40px; background-color: #f2f2f2; padding: 5px;">
+	<nav>
+		<dl class="sub-nav"> 
+			<dt>Options:</dt> 
+			<dd><a href={{ url_for('show_clients') }}>See All</a></dd> 
+			<dd class="active"><a href="#">Add New</a></dd>
+		</dl>
+	</nav>
+</aside>
+<article class="row">
+	<header>
+		<h1>{{ title }}</h1>
+		<h3 class="subheader">New register for your clients list</h3>
+	</header>
+	<div>
+	<form action={{ url_for(action, id=id) }} method="POST" name="registerClient">
+		{{ form.hidden_tag() }}
+		<div class="large-12 columns">
+			<label>Name:</label> 
+			{% if form.name.errors %}
+				{{ form.name(class='error', placeholder='James P. Sullivan') }}
+				{% for error in form.name.errors %}
+					<small class="error">{{ error }}</small>
+				{% endfor %}
+			{% else %}
+				{{ form.name(placeholder='James P. Sullivan') }}
+			{% endif %}
+		</div>
+		<div class="large-12 columns">
+			<label>Company:</label>
+			{% if form.company.errors %}
+				{{ form.company(class='error', placeholder='Monsters, INC.') }}
+				{% for error in form.company.errors %}
+					<small class="error">{{ error }}</small>
+				{% endfor %}
+			{% else %}
+				{{ form.company(placeholder='Monsters, INC.') }}
+			{% endif %}
+		</div>
+		<div class="large-12 columns">
+			<label>E-mail:</label>
+			{% if form.email.errors %}
+				{{ form.email(class='error', placeholder='sulley@monsters.com') }}
+				{% for error in form.email.errors %}
+					<small class="error">{{ error }}</small>
+				{% endfor %}
+			{% else %}
+				{{ form.email(placeholder='sulley@monsters.com') }}
+			{% endif %}
+		</div>
+		<div class="large-12 columns">
+			<label>Address:</label>
+			{% if form.address.errors %}
+				{{ form.address(class='error', placeholder='Monsters Street') }}
+				{% for error in form.address.errors %}
+					<small class="error">{{ error }}</small>
+				{% endfor %}
+			{% else %}
+				{{ form.address(placeholder='Monsters Street') }}
+			{% endif %}
+		</div>
+		<div class="large-4 columns">
+			<label>City:</label>
+			{% if form.city.errors %}
+				{{ form.city(class='error', placeholder='Monstropolis') }}
+				{% for error in form.city.errors %}
+					<small class="error">{{ error }}</small>
+				{% endfor %}
+			{% else %}
+				{{ form.city(placeholder='Monstropolis') }}
+			{% endif %}
+		</div>
+		<div class="large-4 columns">
+			<label>State:</label>
+			{% if form.state.errors %}
+				{{ form.state(class='error', placeholder='Secret Insland') }}
+				{% for error in form.state.errors %}
+					<small class="error">{{ error }}</small>
+				{% endfor %}
+			{% else %}
+				{{ form.state(placeholder='Secret Insland') }}
+			{% endif %}
+		</div>
+		<div class="large-4 columns">
+			<label>Phone:</label>
+			{% if form.phone.errors %}
+				{{ form.phone(class='error', placeholder='000999888') }}
+				{% for error in form.phone.errors %}
+					<small class="error">{{ error }}</small>
+				{% endfor %}
+			{% else %}
+				{{ form.phone(placeholder='000999888') }}
+			{% endif %}
+		</div>
+		<div class="large-12 columns">
+			<input type="submit" value="Register" class="button">
+		</div>
+	</form>
+	</div>
+</article>
+{% endblock %}

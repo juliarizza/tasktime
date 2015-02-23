@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+		<title>TaskTime</title>
+		<!-- <link rel="shortcut icon" href="icon.ico" /> -->
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<link rel="stylesheet" href={{ url_for('static', filename='css/foundation.css') }} />
+		<link rel="stylesheet" href={{ url_for('static', filename='css/foundation-icons.css') }} />
+    	<script src={{ url_for('static', filename='js/vendor/modernizr.js') }}></script>
+    	<script src={{ url_for('static', filename='js/foundation/foundation.equalizer.js') }}></script>
+	</head>
+
+	<body>
+    	<header>
+    		<nav class="icon-bar eight-up"> 
+	    		<a class="item" role="button" tabindex="0" aria-label="Home" href={{ url_for('index') }}>
+	    			<i class="fi-home"></i>
+	    			<label>Home</label>
+	    		</a>
+				<a class="item" role="button" tabindex="0" aria-label="Clients" href={{ url_for('show_clients') }}>
+					<i class="fi-torsos-all"></i>
+					<label>Clients</label>
+				</a>
+				<a class="item" role="button" tabindex="0" aria-label="Team">
+					<i class="fi-torso-business"></i>
+					<label>Team</label>
+				</a>
+				<a class="item" role="button" tabindex="0" aria-label="Projects">
+					<i class="fi-clipboard"></i>
+					<label>Projects</label>
+				</a>
+				<a class="item" role="button" tabindex="0" aria-label="Contracts">
+					<i class="fi-page"></i>
+					<label>Contracts</label>
+				</a>
+				<a class="item" role="button" tabindex="0" aria-label="Tickets">
+					<i class="fi-flag"></i>
+					<label>Tickets</label>
+				</a>
+				<a class="item" role="button" tabindex="0" aria-label="Library">
+			    	<i class="fi-bookmark"></i>
+			    	<label>Library</label>
+				</a>
+				<a class="item" role="button" tabindex="0" aria-label="Reports">
+					<i class="fi-graph-bar"></i>
+					<label>Reports</label>
+				</a>
+			</nav>
+    	</header>
+    	<section>
+    			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for message in messages %}
+					<div data-alert class="alert-box success radius">
+					  {{ message }}
+					  <a href="#" class="close">&times;</a>
+					</div>
+					{% endfor %}
+				{% endif %}
+				{% endwith %}
+    		{% block content %}
+    		{% endblock %}
+    	</section>
+	</body>
+</html>

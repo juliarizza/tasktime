@@ -2,4 +2,9 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-MONGOALCHEMY_DATABASE = 'tasktime'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+
+WTF_CSRF_ENABLED = True
+SECRET_KEY = '19akdcsmjxn&*2304&qn,q'
+
+DEBUG = True

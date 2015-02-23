@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask
-from flask.ext.mongoalchemy import MongoAlchemy
+from flask.ext.script import Manager
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.migrate import Migrate, MigrateCommand
 
 app = Flask(__name__)
 app.config.from_object('config')
 
-db = MongoAlchemy(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
-from app.models import dbs
-from app.routes import index
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
+
+
+from app.models import dbs, forms
+from app.routes import index, users

@@ -1,36 +1,52 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-	<head>
-		<meta charset="utf-8" />
-		<title>TaskTime</title>
-		<!-- <link rel="shortcut icon" href="icon.ico" /> -->
-		<meta content="width=device-width, initial-scale=1.0" name="viewport">
-		<link rel="stylesheet" href={{ url_for('static', filename='css/foundation.css') }} />
-    	<script src={{ url_for('static', filename='js/vendor/modernizr.js') }}></script>
-	</head>
+{% extends "base.html" %}
 
-	<body>
-    	<header>
-    		<nav class="top-bar" data-topbar role="navigation">
-    			<ul class="title-area"> 
-    				<li class="name"> <h1><a href="#">TaskTime</a></h1> </li> <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
-    				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
-    			</ul> 
-    			<section class="top-bar-section"> <!-- Right Nav Section --> 
-    				<ul class="right"> 
-    					<li class="active"><a href="#">Right Button Active</a></li>
-    					<li class="has-dropdown"> <a href="#">Right Button Dropdown</a>
-    						<ul class="dropdown"> 
-    							<li><a href="#">First link in dropdown</a></li>
-    							<li class="active"><a href="#">Active link in dropdown</a></li>
-    						</ul> 
-    					</li>
-    				</ul> <!-- Left Nav Section --> 
-    				<ul class="left"> 
-    					<li><a href="#">Left Nav Button</a></li> 
-    				</ul> 
-    			</section> 
-    		</nav>
-    	</header>
-	</body>
-</html>
+{% block content %}
+<article class="row">
+	<header>
+		<h1>Welcome to TaskTime!</h1>
+		<h3 class="subheader">Follow this steps to set your TaskTime app and get ready to work.</h3>
+	</header>
+	<div class="row" data-equalizer> 
+		<div class="medium-4 columns">
+			<article class="panel" data-equalizer-watch>
+				<header>
+					<h3>Step 1: Data</h3>
+				</header>
+				Register at least one of each:
+				<ul>
+					<li>Client</li>
+					<li>Project</li>
+					<li>Contract</li>
+				</ul>
+			</article>
+		</div>
+		<div class="medium-4 columns">
+			<article class="callout panel" data-equalizer-watch>
+				<header>
+					<h3>Step 2: Work</h3>
+				</header>
+				<ul>
+					<li>Start a ticket</li>
+					<li>Finish a ticket</li>
+					<li>See reports</li>
+				</ul>
+				<footer>
+					<small><strong>PS:</strong> Remember to associate clients or projects and a contract to get the right value of your work.</small>
+				</footer>
+			</article>
+		</div>
+		<div class="medium-4 columns">
+			<article class="columns panel" data-equalizer-watch>
+				<header>
+					<h3>Step 3: Optionals</h3>
+				</header>
+				<ul>
+					<li>Create articles in the library <small>so your clients can resolve their own problem before open a ticket</small></li>
+					<li>Add members to your team</li>
+					<li>Configure custom settings</li>
+				</ul>
+			</article>
+		</div>
+	</div>
+</article>
+{% endblock %}

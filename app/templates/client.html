@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="row">
+	<article class="large-12 columns panel">
+		<header>
+			<h1>{{ title }}</h1>
+			<h3 class="subheader">Your client's profile</h3>
+		</header>
+		<b>Name:</b> {{ client.name }} <br>
+		<b>Company:</b> {{ client.company }} <br>
+		<b>E-mail:</b> {{ client.email }} <br>
+		<b>Address:</b> {{ client.address }} <br>
+		<b>City:</b> {{ client.city }} <br>
+		<b>State:</b> {{ client.state }} <br>
+		<b>Phone:</b> {{ client.phone }}
+	</article>
+</section>
+{% endblock %}

@@ -4,67 +4,75 @@ from werkzeug.security import generate_password_hash
 
 import datetime
 
-def set_password(password):
-	return generate_password_hash(password)
-
-class User(db.Document):
-	name = db.StringField()
-	mail = db.StringField()
-	category = db.EnumField(db.StringField(), \
-		'master', 'employee', \
+class User(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String)
+	mail = db.Column(db.String)
+	passowrd = db.Column(db.String)
+	category = db.Column(db.Enum('master', 'employee'),\
 		default='employee')
 
-	@db.computed_field(db.StringField())
-	def password(pw):
-		return set_password(pw)
+	def __repr__(self):
+		return '<User %r>' % self.name
 
-class Client(db.Document):
-	name = db.StringField()
-	company = db.StringField(required=False)
-	mail = db.StringField()
-	address = db.StringField()
-	city = db.StringField()
-	state = db.StringField()
-	phone = db.StringField()
+class Client(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String)
+	company = db.Column(db.String)
+	email = db.Column(db.String)
+	password = db.Column(db.String)
+	address = db.Column(db.Text)
+	city = db.Column(db.String)
+	state = db.Column(db.String)
+	phone = db.Column(db.String)
 
-	@db.computed_field(db.StringField())
-	def password(pw):
-		return set_password(pw)
+	def __repr__(self):
+		return '<Client %r - %r>' % (self.name, self.company)
 
-class Project(db.Document):
-	name = db.StringField()
-	description = db.StringField(required=False)
-	clients = db.DocumentField(Client)
+class Project(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String)
+	description = db.Column(db.Text)
+	clients = db.Column(db.Integer, db.ForeignKey('client.id'))
 
-class Article(db.Document):
-	name = db.StringField()
-	content = db.StringField()
-	attachments = db.StringField(required=False)
-	author = db.DocumentField(User)
+	def __repr__(self):
+		return '<Project %r>' % self.name
 
-class Contract(db.Document):
-	title = db.StringField()
-	price_hour = db.FloatField()
-	total_hours = db.IntField(default=1)
-	period = db.IntField(default=1) #in months
-	attachment = db.StringField(required=False)
+class Article(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String)
+	content = db.Column(db.String)
+	attachments = db.Column(db.String)
+	author = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-class Ticket(db.Document):
-	title = db.StringField()
-	description = db.StringField()
-	priority = db.EnumField(db.StringField(), \
-		'high', 'normal', 'low', \
-		default='normal')
-	status = db.EnumField(db.StringField(), \
-		'open', 'closed', 'on hold', \
-		default='open')
-	end_time = db.DateTimeField()
-	project = db.DocumentField(Project, required=False)
-	client = db.DocumentField(Client, required=False)
-	employee = db.DocumentField(User)
-	contract = db.DocumentField(Contract)
+	def __repr__(self):
+		return '<Article %r>' % self.name
 
-	@db.computed_field(db.DateTimeField(), one_time=True)
-	def start_time(obj):
-		return datetime.datetime.now()
+class Contract(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	title = db.Column(db.String)
+	price_hour = db.Column(db.Float)
+	total_hours = db.Column(db.Integer, default=1)
+	period = db.Column(db.Integer, default=1) #in months
+	attachment = db.Column(db.String)
+
+	def __repr__(self):
+		return '<Contract %r>' % self.title
+
+class Ticket(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	title = db.Column(db.String)
+	description = db.Column(db.String)
+	priority = db.Column(db.Enum('high', 'normal', \
+		'low'), default='normal')
+	status = db.Column(db.Enum('open', 'closed', \
+		'on hold'), default='open')
+	end_time = db.Column(db.DateTime, default=datetime.datetime.now)
+	project = db.Column(db.Integer, db.ForeignKey('project.id'))
+	client = db.Column(db.Integer, db.ForeignKey('client.id'))
+	employee = db.Column(db.Integer, db.ForeignKey('user.id'))
+	contract = db.Column(db.Integer, db.ForeignKey('contract.id'))
+
+	def __repr__(self):
+		return '<Ticket %r>' % self.title
 
