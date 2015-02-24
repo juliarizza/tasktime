@@ -5,56 +5,81 @@
 		<title>TaskTime</title>
 		<!-- <link rel="shortcut icon" href="icon.ico" /> -->
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
-		<link rel="stylesheet" href={{ url_for('static', filename='css/foundation.css') }} />
-		<link rel="stylesheet" href={{ url_for('static', filename='css/foundation-icons.css') }} />
-    	<script src={{ url_for('static', filename='js/vendor/modernizr.js') }}></script>
-    	<script src={{ url_for('static', filename='js/foundation/foundation.equalizer.js') }}></script>
+		<link rel="stylesheet" href={{ url_for('static', filename='css/bootstrap.min.css') }} />
+    	<script src={{ url_for('static', filename='js/jquery-2.1.3.min.js') }}></script>
+    	<script src={{ url_for('static', filename='js/bootstrap.min.js') }}></script>
+    	{% block head %}
+    	{% endblock %}
 	</head>
 
 	<body>
     	<header>
-    		<nav class="icon-bar eight-up"> 
-	    		<a class="item" role="button" tabindex="0" aria-label="Home" href={{ url_for('index') }}>
-	    			<i class="fi-home"></i>
-	    			<label>Home</label>
-	    		</a>
-				<a class="item" role="button" tabindex="0" aria-label="Clients" href={{ url_for('show_clients') }}>
-					<i class="fi-torsos-all"></i>
-					<label>Clients</label>
-				</a>
-				<a class="item" role="button" tabindex="0" aria-label="Team">
-					<i class="fi-torso-business"></i>
-					<label>Team</label>
-				</a>
-				<a class="item" role="button" tabindex="0" aria-label="Projects">
-					<i class="fi-clipboard"></i>
-					<label>Projects</label>
-				</a>
-				<a class="item" role="button" tabindex="0" aria-label="Contracts">
-					<i class="fi-page"></i>
-					<label>Contracts</label>
-				</a>
-				<a class="item" role="button" tabindex="0" aria-label="Tickets">
-					<i class="fi-flag"></i>
-					<label>Tickets</label>
-				</a>
-				<a class="item" role="button" tabindex="0" aria-label="Library">
-			    	<i class="fi-bookmark"></i>
-			    	<label>Library</label>
-				</a>
-				<a class="item" role="button" tabindex="0" aria-label="Reports">
-					<i class="fi-graph-bar"></i>
-					<label>Reports</label>
-				</a>
+    		<nav class="navbar navbar-inverse"> 
+    			<div class="container-fluid">
+				    <!-- Brand and toggle get grouped for better mobile display -->
+				    <div class="navbar-header">
+				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				      </button>
+				      <a class="navbar-brand" href={{ url_for('index') }}>TaskTime</a>
+				    </div>
+				    
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      <ul class="nav navbar-nav">
+				      <li>
+				      	<a href={{ url_for('show_clients') }}>
+							<i class="glyphicon glyphicon-user"></i>
+							<label>Clients</label>
+						</a>
+				      </li>
+				      <li>
+						<a >
+							<i class="glyphicon glyphicon-briefcase"></i>
+							<label>Team</label>
+						</a>
+				      </li>
+				      <li>
+						<a >
+							<i class="glyphicon glyphicon-inbox"></i>
+							<label>Projects</label>
+						</a>
+				      </li>
+				      <li>
+						<a >
+							<i class="glyphicon glyphicon-folder-open"></i>
+							<label>Contracts</label>
+						</a>
+				      </li>
+				      <li>
+						<a >
+							<i class="glyphicon glyphicon-bullhorn"></i>
+							<label>Tickets</label>
+						</a>
+				      </li>
+				      <li>
+						<a >
+					    	<i class="glyphicon glyphicon-book"></i>
+					    	<label>Library</label>
+						</a>
+				      </li>
+				      <li>
+						<a >
+							<i class="glyphicon glyphicon-stats"></i>
+							<label>Reports</label>
+						</a>
+				      </li>
+				      </ul>
+				    </div>
+				</div>
 			</nav>
     	</header>
     	<section>
     			{% with messages = get_flashed_messages() %}
 				{% if messages %}
-					{% for message in messages %}
-					<div data-alert class="alert-box success radius">
+					{% for category, message in messages %}
+					<div class="alert alert-{{category}} alert-dismissible fade in" role="alert">
+					<button class="close" aria-label="Close" data-dismiss="alert" type="button">
 					  {{ message }}
-					  <a href="#" class="close">&times;</a>
 					</div>
 					{% endfor %}
 				{% endif %}

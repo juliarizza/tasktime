@@ -1,46 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<aside class="large-12 columns" style="height: 40px; background-color: #f2f2f2; padding: 5px;">
+<div class="container">
+<aside class="col-md-12">
+	<ol class="breadcrumb">
+	  <li><a href={{ url_for('index') }}>Home</a></li>
+	  <li class="active">Clients</li>
+	</ol>
 	<nav>
-		<dl class="sub-nav"> 
-			<dt>Options:</dt> 
-			<dd class="active"><a href="#">See All</a></dd> 
-			<dd><a href={{ url_for('register_client') }}>Add New</a></dd>
-		</dl>
+		<ul class="nav nav-pills">
+			<li class="active"><a href={{ url_for('register_client') }}>Add new</a></li>		
+		</ul>
 	</nav>
 </aside>
 
-<section class="row">
+<section class="col-md-12">
 	<header>
 		<h1>All Clients</h1>
-		<h3 class="subheader">Check and manage your clients</h3>
+		<h3>Check and manage your clients</h3>
 	</header>
 	{% if clients %}
-	<table style="width: 100%;">
+	<table class="table">
 		<thead>
 			<tr>
-				<th class="text-center">Name</th>
-				<th class="text-center">Company</th>
-				<th class="text-center">Actions</th>
+				<th>Name</th>
+				<th>Company</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for client in clients %}
 			<tr>
 				<td>{{ client.name }}</td>
-				<td>{{ client.company }}</td>
-				<td class="text-center">
-					<a href={{ url_for('show_client', id=client.id) }}><i class="fi-zoom-in"></i></a>
-					<a href={{ url_for('edit_client', id=client.id) }}><i class="fi-pencil"></i></a>
-					<a href={{ url_for('delete_client', id=client.id) }}><i class="fi-trash"></i></a>
+				<td>{{ client.company_name }}</td>
+				<td>
+					<a href={{ url_for('show_client', id=client.id) }}><i class="glyphicon glyphicon-eye-open"></i></a>
+					<a href={{ url_for('edit_client', id=client.id) }}><i class="glyphicon glyphicon-pencil"></i></a>
+					<a href={{ url_for('delete_client', id=client.id) }}><i class="glyphicon glyphicon-trash"></i></a>
 				</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	{% else %}
-	<div class="panel text-center">Ops! No clients yet :(</div>
+	<div class="panel panel-default">Ops! No clients yet :(</div>
 	{% endif %}
 </section>
+</div>
 {% endblock %}

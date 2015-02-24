@@ -1,50 +1,64 @@
 {% extends "base.html" %}
 
 {% block content %}
-<article class="row">
+<article class="container">
 	<header>
 		<h1>Welcome to TaskTime!</h1>
-		<h3 class="subheader">Follow this steps to set your TaskTime app and get ready to work.</h3>
+		<h3>Follow this steps to set your TaskTime app and get ready to work.</h3>
 	</header>
-	<div class="row" data-equalizer> 
-		<div class="medium-4 columns">
-			<article class="panel" data-equalizer-watch>
-				<header>
-					<h3>Step 1: Data</h3>
-				</header>
-				Register at least one of each:
-				<ul>
-					<li>Client</li>
-					<li>Project</li>
-					<li>Contract</li>
-				</ul>
+	<div class="row"> 
+		<div class="col-md-4">
+			<article class="panel panel-danger">
+				<div class="panel-heading">
+					<header>
+						<h3 class="panel-title">Step 1: Data</h3>
+					</header>
+				</div>
+				<div class="panel-body">
+					Register at least one of each:
+					<ul>
+						<li>Client</li>
+						<li>Project</li>
+						<li>Contract</li>
+					</ul>
+				</div>
 			</article>
 		</div>
-		<div class="medium-4 columns">
-			<article class="callout panel" data-equalizer-watch>
-				<header>
-					<h3>Step 2: Work</h3>
-				</header>
-				<ul>
-					<li>Start a ticket</li>
-					<li>Finish a ticket</li>
-					<li>See reports</li>
-				</ul>
-				<footer>
-					<small><strong>PS:</strong> Remember to associate clients or projects and a contract to get the right value of your work.</small>
-				</footer>
+		<div class="col-md-4">
+			<article class="panel panel-warning">
+				<div class="panel-heading">
+					<header>
+						<h3 class="panel-title">Step 2: Work</h3>
+					</header>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li>Start a ticket</li>
+						<li>Finish a ticket</li>
+						<li>See reports</li>
+					</ul>
+				</div>
+				<div class="panel-footer">
+					<footer>
+						<small><strong>PS:</strong> Remember to associate clients or projects and a contract to get the right value of your work.</small>
+					</footer>
+				</div>
 			</article>
 		</div>
-		<div class="medium-4 columns">
-			<article class="columns panel" data-equalizer-watch>
-				<header>
-					<h3>Step 3: Optionals</h3>
-				</header>
-				<ul>
-					<li>Create articles in the library <small>so your clients can resolve their own problem before open a ticket</small></li>
-					<li>Add members to your team</li>
-					<li>Configure custom settings</li>
-				</ul>
+		<div class="col-md-4">
+			<article class="panel panel-success">
+				<div class="panel-heading">
+					<header>
+						<h3 class="panel-title">Step 3: Optionals</h3>
+					</header>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li>Create articles in the library <small>so your clients can resolve their own problem before open a ticket</small></li>
+						<li>Add members to your team</li>
+						<li>Configure custom settings</li>
+					</ul>
+				</div>
 			</article>
 		</div>
 	</div>

@@ -6,28 +6,57 @@ import datetime
 
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
+	## user info
 	name = db.Column(db.String)
-	mail = db.Column(db.String)
+	email = db.Column(db.String)
 	passowrd = db.Column(db.String)
 	category = db.Column(db.Enum('master', 'employee'),\
 		default='employee')
+	## company info
+	company_name = db.Column(db.String) ## PT-BR: Razão Social
+	trade_name = db.Column(db.String) ## PT-BR: Nome Fantasia
+	company_federal_id = db.Column(db.String) ## PT-BR: CNPJ
+	company_state_id = db.Column(db.String) ## PT-BR: Inscrição Estadual
+	## contact info
+	address = db.Column(db.String)
+	number = db.Column(db.Integer)
+	complement = db.Column(db.String(20))
+	zip_code = db.Column(db.String)
+	city = db.Column(db.String)
+	state = db.Column(db.String)
+	country = db.Column(db.String)
+	phone = db.Column(db.String)
+	celphone = db.Column(db.String)
 
 	def __repr__(self):
 		return '<User %r>' % self.name
 
 class Client(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String)
-	company = db.Column(db.String)
+	## user info
+	name = db.Column(db.String) 
 	email = db.Column(db.String)
 	password = db.Column(db.String)
-	address = db.Column(db.Text)
+	## company info
+	company_name = db.Column(db.String) ## PT-BR: Razão Social
+	trade_name = db.Column(db.String) ## PT-BR: Nome Fantasia
+	company_federal_id = db.Column(db.String) ## PT-BR: CNPJ
+	company_state_id = db.Column(db.String) ## PT-BR: Inscrição Estadual
+	## contact info
+	address = db.Column(db.String)
+	number = db.Column(db.Integer)
+	complement = db.Column(db.String(20))
+	zip_code = db.Column(db.String)
 	city = db.Column(db.String)
 	state = db.Column(db.String)
+	country = db.Column(db.String)
 	phone = db.Column(db.String)
+	celphone = db.Column(db.String)
+
+
 
 	def __repr__(self):
-		return '<Client %r - %r>' % (self.name, self.company)
+		return '<Client %r - %r>' % (self.name - self.trading_name)
 
 class Project(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
