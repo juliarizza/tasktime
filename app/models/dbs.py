@@ -91,7 +91,7 @@ class Contract(db.Model):
 class Ticket(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	title = db.Column(db.String)
-	description = db.Column(db.String)
+	description = db.Column(db.Text)
 	priority = db.Column(db.Enum('high', 'normal', \
 		'low'), default='normal')
 	status = db.Column(db.Enum('open', 'closed', \
@@ -104,4 +104,5 @@ class Ticket(db.Model):
 
 	def __repr__(self):
 		return '<Ticket %r>' % self.title
+    
 

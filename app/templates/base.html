@@ -45,7 +45,7 @@
 						</a>
 				      </li>
 				      <li>
-						<a >
+						<a href={{ url_for('show_contracts') }}>
 							<i class="glyphicon glyphicon-folder-open"></i>
 							<label>Contracts</label>
 						</a>
@@ -73,12 +73,12 @@
 				</div>
 			</nav>
     	</header>
-    	<section>
-    			{% with messages = get_flashed_messages() %}
+    	<section class="container">
+    			{% with messages = get_flashed_messages(with_categories=True) %}
 				{% if messages %}
 					{% for category, message in messages %}
-					<div class="alert alert-{{category}} alert-dismissible fade in" role="alert">
-					<button class="close" aria-label="Close" data-dismiss="alert" type="button">
+					<div class="alert alert-{{category}} alert-dismissible fade in col-md-offset-8" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					  {{ message }}
 					</div>
 					{% endfor %}

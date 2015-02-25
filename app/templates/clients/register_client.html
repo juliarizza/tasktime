@@ -5,7 +5,7 @@
 <aside class="col-md-12">
 	<ol class="breadcrumb">
 	  <li><a href={{ url_for('index') }}>Home</a></li>
-	  <li><a href={{ url_for('register_client') }}>Clients</a></li>
+	  <li><a href={{ url_for('show_clients') }}>Clients</a></li>
 	  <li class="active">{{title}}</li>
 	</ol>
 </aside>
@@ -15,7 +15,11 @@
 		<h3>New register for your clients list</h3>
 	</header>
 	<div>
-	<form action={{ url_for(action, id=id) }} method="POST" name="registerClient">
+	{% if action == 'register_client' %}
+	<form action={{ url_for(action) }} method="post" name="registerClient">
+	{% else %}
+	<form action={{ url_for(action, id=id) }} method="post" name="editClient">
+	{% endif %}
 		{{ form.hidden_tag() }}
 		<fieldset>
 			<legend>User Info</legend>
@@ -200,7 +204,7 @@
 				</div>
 			</div>
 		</fieldset>
-		<div class="large-12 columns">
+		<div class="col-md-12">
 			<input type="submit" value="Register" class="btn btn-primary">
 		</div>
 	</form>

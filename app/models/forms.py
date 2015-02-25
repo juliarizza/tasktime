@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
 from wtforms import StringField, TextAreaField,\
-	IntegerField
+	IntegerField, FloatField, FileField
 from wtforms.validators import DataRequired, Email,\
 	Optional
 
@@ -24,3 +24,10 @@ class RegisterClient(Form):
 	country = StringField('country', validators=[DataRequired()])
 	phone = StringField('phone')
 	celphone = StringField('celphone')
+
+class NewContract(Form):
+	title = StringField('title', validators=[DataRequired()])
+	price_hour = FloatField('price_hour', validators=[DataRequired()])
+	total_hours = IntegerField('total_hours', validators=[DataRequired()])
+	period = IntegerField('period', validators=[DataRequired()])
+	attachment = FileField('attachment', validators=[Optional()])

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<aside class="col-md-12">
+	<ol class="breadcrumb">
+	  <li><a href={{ url_for('index') }}>Home</a></li>
+	  <li><a href={{ url_for('show_contracts') }}>Contracts</a></li>
+	  <li class="active">{{title}}</li>
+	</ol>
+</aside>
+<article class="col-md-12">
+	<header>
+		<h1>{{ title }}</h1>
+		<h3>New register for your contracts list</h3>
+	</header>
+	{% if action == "new_contract" %}
+	<form action={{ url_for(action) }} method="post" name="newContract">
+	{% else %}
+	<form action={{ url_for(action, id=id) }} method="post" name="editContract">
+	{% endif %}
+		{{ form.hidden_tag() }}
+		{% if form.title.errors %}
+		<div class="form-group has-error col-md-12">
+		{% else %}
+		<div class="form-group col-md-12">
+		{% endif %}
+			<label class="control-label">Title</label>
+			{{ form.title(class='form-control', placeholder='Main Contract') }}
+			{% for error in form.title.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.price_hour.errors %}
+		<div class="form-group has-error col-md-3">
+		{% else %}
+		<div class="form-group col-md-3">
+		{% endif %}
+			<label class="control-label">Price/Hour</label>
+			{{ form.price_hour(class='form-control', placeholder=50.0) }}
+			{% for error in form.price_hour.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.total_hours.errors %}
+		<div class="form-group has-error col-md-3">
+		{% else %}
+		<div class="form-group col-md-3">
+		{% endif %}
+			<label class="control-label">Total Hours per Period</label>
+			{{ form.total_hours(class='form-control', placeholder=6) }}
+			{% for error in form.total_hours.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.period.errors %}
+		<div class="form-group has-error col-md-3">
+		{% else %}
+		<div class="form-group col-md-3">
+		{% endif %}
+			<label class="control-label">Period (in months)</label>
+			{{ form.period(class='form-control', placeholder=1)}}
+			{% for error in form.period.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.attachment.errors %}
+		<div class="form-group has-error col-md-3">
+		{% else %}
+		<div class="form-group col-md-3">
+		{% endif %}
+			<label class="control-label">Attachment</label>
+			{{ form.attachment }}
+			{% for error in form.attachment.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		<div class="form-group col-md-12">
+			<input type="submit" value="Submit" class="btn btn-primary">
+		</div>
+	</form>
+</article>
+</div>
+{% endblock %}

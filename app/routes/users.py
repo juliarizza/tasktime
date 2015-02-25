@@ -1,22 +1,29 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect, url_for
+from flask.ext.sqlalchemy import Pagination
 from app import app, db
 from app.models.forms import RegisterClient
 from app.models.dbs import Client
 from app.models.global_functions import random_password,\
     set_password
 
-@app.route('/clients', methods=['GET'])
-def show_clients():
+@app.route('/clients', defaults={'page':1})
+@app.route('/clients/<int:page>')
+def show_clients(page):
     clients = Client.query.all()
-    return render_template('clients.html',
+    per_page = 10
+    items = clients[(page-1)*per_page:per_page*page]
+    pagination = Pagination(clients, page, per_page,\
+                            len(clients), items)
+    return render_template('clients/clients.html',
                             title='Clients',
-                            clients=clients)
+                            clients=items,
+                            pagination=pagination)
 
-@app.route('/client/<int:id>', methods=['GET'])
+@app.route('/client/<int:id>')
 def show_client(id):
     client = Client.query.get(id)
-    return render_template('client.html',
+    return render_template('clients/client.html',
                             title='Client',
                             client=client)
 
@@ -30,9 +37,9 @@ def register_client():
         db.session.add(entry)
         db.session.commit()
         flash('New client on list: %s' %\
-            (form.name.data))
+            (form.name.data), 'success')
         return redirect(url_for('show_client', id=entry.id))
-    return render_template('register_client.html', 
+    return render_template('clients/register_client.html', 
                            title='Register Client',
                            action='register_client',
                            id = '',
@@ -47,18 +54,18 @@ def edit_client(id):
             form.data
             )
         db.session.commit()
-        flash('Client edited: %r' % form.name.data)
+        flash('Client edited: %s' % form.name.data, 'success')
         return redirect(url_for('show_clients'))
-    return render_template('register_client.html',
+    return render_template('clients/register_client.html',
                             title='Edit Client',
                             action='edit_client',
                             id=id,
                             form=form)
 
-@app.route('/delete/<int:id>')
+@app.route('/delete_client/<int:id>')
 def delete_client(id):
     client = Client.query.get(id)
     db.session.delete(client)
     db.session.commit()
-    flash('Client removed: %r' % client.name)
+    flash('Client removed: %s' % client.name, 'info')
     return redirect(url_for('show_clients'))
