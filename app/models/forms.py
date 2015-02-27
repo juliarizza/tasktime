@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
 from wtforms import StringField, TextAreaField,\
-	IntegerField, FloatField, FileField
+	IntegerField, FloatField, FileField,\
+	SelectField
 from wtforms.validators import DataRequired, Email,\
 	Optional
 
@@ -31,3 +32,14 @@ class NewContract(Form):
 	total_hours = IntegerField('total_hours', validators=[DataRequired()])
 	period = IntegerField('period', validators=[DataRequired()])
 	attachment = FileField('attachment', validators=[Optional()])
+
+class NewTicket(Form):
+	title = StringField('title', validators=[DataRequired()])
+	description = TextAreaField('description', validators=[DataRequired()])
+	priority = SelectField('priority', 
+							choices=[('high', 'High'), ('normal', 'Normal'), ('low', 'Low')],
+							default='normal',
+							validators=[DataRequired()])
+	client = SelectField('client', validators=[Optional()])
+	employee = SelectField('employee', validators=[DataRequired()])
+	contract = SelectField('contract', validators=[DataRequired()])

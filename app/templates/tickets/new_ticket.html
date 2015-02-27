@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<aside class="col-md-12">
+	<ol class="breadcrumb">
+	  <li><a href={{ url_for('index') }}>Home</a></li>
+	  <li><a href={{ url_for('show_tickets') }}>Tickets</a></li>
+	  <li class="active">{{title}}</li>
+	</ol>
+</aside>
+<article class="col-md-12">
+	<header>
+		<h1>{{ title }}</h1>
+		<h3>New register for your tickets list</h3>
+	</header>
+	{% if action == 'new_ticket' %}
+	<form action="{{ url_for(action)}}" method="post" name="newTicket">
+	{% else %}
+	<form action="{{ url_for(action, id=id) }}" method="post" name="editTicket">
+	{% endif %}
+	{{ form.hidden_tag() }}	
+		{% if form.title.errors %}
+		<div class="form-group has-error col-md-12">
+		{% else %}
+		<div class="form-group col-md-12">
+		{% endif %}
+			<label class="control-label">Title</label>
+			{{ form.title(class='form-control', placeholder='What happened?') }}
+			{% for error in form.title.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.description.errors %}
+		<div class="form-group has-error col-md-12">
+		{% else %}
+		<div class="form-group col-md-12">
+		{% endif %}
+			<label class="control-label">Description</label>
+			{{ form.description(class='form-control', placeholder="Explain the problem.") }}
+			{% for error in form.description.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.priority.errors %}
+		<div class="form-group has-error col-md-4">
+		{% else %}
+		<div class="form-group col-md-4">
+		{% endif %}
+			<label class="control-label">Priority</label>
+			{{ form.priority(class='form-control') }}
+			{% for error in form.priority.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.contract.errors %}
+		<div class="form-group has-error col-md-8">
+		{% else %}
+		<div class="form-group col-md-8">
+		{% endif %}
+			<label class="control-label">Contract</label>
+			{{ form.contract(class='form-control') }}
+			{% for error in form.contract.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.client.errors %}
+		<div class="form-group has-error col-md-6">
+		{% else %}
+		<div class="form-group col-md-6">
+		{% endif %}
+			<label class="control-label">Client</label>
+			{{ form.client(class='form-control') }}
+			{% for error in form.client.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.employee.errors %}
+		<div class="form-group has-error col-md-6">
+		{% else %}
+		<div class="form-group col-md-6">
+		{% endif %}
+			<label class="control-label">Employee</label>
+			{{ form.employee(class='form-control') }}
+			{% for error in form.employee.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		<div class="form-group col-md-12">
+			<input type="submit" value="Submit" class="btn btn-primary">
+		</div>
+	</form>
+</article>
+</div>
+{% endblock %}

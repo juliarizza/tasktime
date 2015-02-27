@@ -96,7 +96,8 @@ class Ticket(db.Model):
 		'low'), default='normal')
 	status = db.Column(db.Enum('open', 'closed', \
 		'on hold'), default='open')
-	end_time = db.Column(db.DateTime, default=datetime.datetime.now)
+	start_time = db.Column(db.DateTime, default=datetime.datetime.now)
+	end_time = db.Column(db.DateTime)
 	project = db.Column(db.Integer, db.ForeignKey('project.id'))
 	client = db.Column(db.Integer, db.ForeignKey('client.id'))
 	employee = db.Column(db.Integer, db.ForeignKey('user.id'))
