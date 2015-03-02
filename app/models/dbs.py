@@ -9,9 +9,10 @@ class User(db.Model):
 	## user info
 	name = db.Column(db.String)
 	email = db.Column(db.String)
-	passowrd = db.Column(db.String)
+	password = db.Column(db.String)
 	category = db.Column(db.Enum('master', 'employee'),\
 		default='employee')
+	role = db.Column(db.String)
 	## company info
 	company_name = db.Column(db.String) ## PT-BR: Razão Social
 	trade_name = db.Column(db.String) ## PT-BR: Nome Fantasia
@@ -27,6 +28,9 @@ class User(db.Model):
 	country = db.Column(db.String)
 	phone = db.Column(db.String)
 	celphone = db.Column(db.String)
+	## relationships
+	tickets = db.relationship('Ticket', backref='employees', lazy='dynamic')
+	articles = db.relationship('Article', backref='authors', lazy='dynamic')
 
 	def __repr__(self):
 		return '<User %r>' % self.name
@@ -52,20 +56,12 @@ class Client(db.Model):
 	country = db.Column(db.String)
 	phone = db.Column(db.String)
 	celphone = db.Column(db.String)
-
+	## relationships
+	tickets = db.relationship('Ticket', backref='clients', lazy='dynamic')
 
 
 	def __repr__(self):
 		return '<Client %r - %r>' % (self.name - self.trading_name)
-
-class Project(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String)
-	description = db.Column(db.Text)
-	clients = db.Column(db.Integer, db.ForeignKey('client.id'))
-
-	def __repr__(self):
-		return '<Project %r>' % self.name
 
 class Article(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -84,6 +80,7 @@ class Contract(db.Model):
 	total_hours = db.Column(db.Integer, default=1)
 	period = db.Column(db.Integer, default=1) #in months
 	attachment = db.Column(db.String)
+	tickets = db.relationship('Ticket', backref='contracts', lazy='dynamic')
 
 	def __repr__(self):
 		return '<Contract %r>' % self.title
@@ -96,9 +93,8 @@ class Ticket(db.Model):
 		'low'), default='normal')
 	status = db.Column(db.Enum('open', 'closed', \
 		'on hold'), default='open')
-	start_time = db.Column(db.DateTime, default=datetime.datetime.now)
+	start_time = db.Column(db.DateTime)
 	end_time = db.Column(db.DateTime)
-	project = db.Column(db.Integer, db.ForeignKey('project.id'))
 	client = db.Column(db.Integer, db.ForeignKey('client.id'))
 	employee = db.Column(db.Integer, db.ForeignKey('user.id'))
 	contract = db.Column(db.Integer, db.ForeignKey('contract.id'))

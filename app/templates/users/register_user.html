@@ -5,20 +5,20 @@
 <aside class="col-md-12">
 	<ol class="breadcrumb">
 	  <li><a href={{ url_for('index') }}>Home</a></li>
-	  <li><a href={{ url_for('show_clients') }}>Clients</a></li>
+	  <li><a href={{ url_for('show_users') }}>Users</a></li>
 	  <li class="active">{{title}}</li>
 	</ol>
 </aside>
 <article class="col-md-12">
 	<header>
 		<h1>{{ title }}</h1>
-		<h3>New register for your clients list</h3>
+		<h3>New register for your users list</h3>
 	</header>
 	<div>
-	{% if action == 'register_client' %}
-	<form action={{ url_for(action) }} method="post" name="registerClient">
+	{% if action == 'register_user' %}
+	<form action={{ url_for(action) }} method="post" name="registerUser">
 	{% else %}
-	<form action={{ url_for(action, id=id) }} method="post" name="editClient">
+	<form action={{ url_for(action, id=id) }} method="post" name="editUser">
 	{% endif %}
 		{{ form.hidden_tag() }}
 		<fieldset>
@@ -34,16 +34,29 @@
 					<small class="help-block">{{ error }}</small>
 				{% endfor %}
 			</div>
-			{% if form.email.errors %}
-			<div class="form-group has-error">
-			{% else %}
-			<div class="form-group">
-			{% endif %}
+			<div class="row form-group">
+				{% if form.email.errors %}
+				<div class="col-md-6 has-error">
+				{% else %}
+				<div class="col-md-6">
+				{% endif %}
 				<label class="control-label">E-mail:</label>
 				{{ form.email(class='form-control', placeholder='john@email.com') }}
 				{% for error in form.email.errors %}
 					<small class="help-block">{{ error }}</small>
 				{% endfor %}
+				</div>
+				{% if form.role.errors %}
+				<div class="col-md-6 has-error">
+				{% else %}
+				<div class="col-md-6">
+				{% endif %}
+				<label class="control-label">Role:</label>
+				{{ form.role(class='form-control', placeholder='Programmer') }}
+				{% for error in form.role.errors %}
+					<small class="help-block">{{ error }}</small>
+				{% endfor %}
+				</div>
 			</div>
 		</fieldset>
 

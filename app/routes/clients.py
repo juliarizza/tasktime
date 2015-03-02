@@ -42,7 +42,6 @@ def register_client():
     return render_template('clients/register_client.html', 
                            title='Register Client',
                            action='register_client',
-                           id = '',
                            form=form)
 
 @app.route('/edit_client/<int:id>', methods=['GET', 'POST'])

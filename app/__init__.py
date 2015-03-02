@@ -18,7 +18,7 @@ manager.add_command('db', MigrateCommand)
 
 from app.models import dbs, forms
 from app.routes import index, clients, contracts,\
-	tickets
+	tickets, users
 
 admin = Admin(app)
 admin.add_view(ModelView(dbs.User, db.session))

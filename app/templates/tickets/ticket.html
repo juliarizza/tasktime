@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container">
+	<article class="col-md-12">
+		<header>
+			<ol class="breadcrumb">
+			  <li><a href={{ url_for('index') }}>Home</a></li>
+			  <li><a href={{ url_for('show_tickets') }}>Tickets</a></li>
+			  <li class="active">Ticket</li>
+			</ol>
+			<h1>{{ title }}</h1>
+			<h3>Your ticket's info</h3>
+		</header>
+	</article>
+	<div class="col-md-12">
+		<p><b>Title:</b> {{ ticket.title }}</p>
+		<p><b>Description:</b> <p>{{ ticket.description }}</p>
+		<p><b>Priority:</b> {% if ticket.priority == 'high' %}
+							<span class="label label-danger">
+						{% elif ticket.priority == 'low' %}
+							<span class="label label-info">
+						{% else %}
+							<span class="label label-default">
+						{% endif %}
+							{{ ticket.priority|capitalize }}
+							</span></p>
+		<p><b>Status:</b> {% if ticket.status == 'open' %}
+						<span class="label label-primary">
+					{% elif ticket.status == 'on hold' %}
+						<span class="label label-warning">
+					{% else %}
+						<span class="label label-success">
+					{% endif %}
+						{{ ticket.status|capitalize }}					
+						</span></p>
+		<p><b>Start Time:</b> {{ ticket.start_time }}</p>
+		<p><b>End Time:</b> {{ ticket.end_time }}</p>
+		<p><b>Client:</b> {{ ticket.client.name }}</p>
+		<p><b>Employee:</b> {{ ticket.employee.name }}</p>
+		<p><b>Contract:</b> {{ ticket.contract.title }}</p>
+	</div>
+</section>
+{% endblock %}

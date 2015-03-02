@@ -33,8 +33,28 @@
 			{% for ticket in tickets %}
 			<tr>
 				<td>{{ ticket.title }}</td>
-				<td>{{ ticket.priority }}</td>
-				<td>{{ ticket.status }}</td>
+				<td>
+					{% if ticket.priority == 'high' %}
+						<span class="label label-danger">
+					{% elif ticket.priority == 'low' %}
+						<span class="label label-info">
+					{% else %}
+						<span class="label label-default">
+					{% endif %}
+					{{ ticket.priority|capitalize }}
+					</span>
+				</td>
+				<td>
+					{% if ticket.status == 'open' %}
+						<span class="label label-primary">
+					{% elif ticket.status == 'on hold' %}
+						<span class="label label-warning">
+					{% else %}
+						<span class="label label-success">
+					{% endif %}
+					{{ ticket.status|capitalize }}					
+					</span>
+				</td>
 				<td>
 					<a href={{ url_for('ticket_info', id=ticket.id) }}><i class="glyphicon glyphicon-eye-open"></i></a>
 					<a href={{ url_for('edit_ticket', id=ticket.id) }}><i class="glyphicon glyphicon-pencil"></i></a>

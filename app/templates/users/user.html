@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container">
+	<article class="col-md-12">
+		<header>
+			<ol class="breadcrumb">
+			  <li><a href={{ url_for('index') }}>Home</a></li>
+			  <li><a href={{ url_for('show_users') }}>Users</a></li>
+			  <li class="active">User</li>
+			</ol>
+			<h1>{{ title }}</h1>
+			<h3>Your user's profile</h3>
+			<ul class="nav nav-tabs nav-justified" data-tabs="tabs">
+			  <li class="active"><a href="#panel1" data-toggle="tab">User Info</a></li>
+			  <li><a href="#panel2" data-toggle="tab">Company Info</a></li>
+			  <li><a href="#panel3" data-toggle="tab">Contact Info</a></li>
+			</ul>
+		</header>
+		<div class="tab-content">
+			<div class="tab-pane fade in active col-md-8" id="panel1">
+				<h4>User Info</h4>
+				<b>Name:</b> {{ user.name }} <br>
+				<b>E-mail:</b> {{ user.email }} <br>
+				<b>Role:</b> {{ user.role }}
+			</div>
+			<div class="tab-pane fade" id="panel2">
+				<h4>Company Info</h4>
+				<b>Company Name:</b> {{ user.company_name }} <br>
+				<b>Trade Name:</b> {{ user.trade_name }} <br>
+				<b>Company Federal ID:</b> {{ user.company_federal_id }} <br>
+				<b>Company State ID:</b> {{ user.company_state_id }}
+			</div>
+			<div class="tab-pane fade" id="panel3">
+				<h4>Contact Info</h4>
+				<b>Address:</b> {{ user.address }}, {{user.number}} <br>
+				<b>Complement:</b> {{ user.complement }} <br>
+				<b>Zip Code:</b> {{ user.zip_code }} <br>
+				<b>City:</b> {{ user.city }} <br>
+				<b>State:</b> {{ user.state }} <br>
+				<b>Country:</b> {{ user.country }} <br>
+				<b>Phone:</b> {{ user.phone }}
+				<b>Celphone:</b> {{ user.celphone }}
+			</div>
+		</div>
+	</article>
+</section>
+{% endblock %}
+

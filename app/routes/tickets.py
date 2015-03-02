@@ -21,17 +21,21 @@ def show_tickets(page):
 
 @app.route('/ticket/<int:id>')
 def ticket_info(id):
-    pass
+    ticket = Ticket.query.get(id)
+    print ticket.client
+    return render_template('tickets/ticket.html',
+                            title='Ticket',
+                            ticket=ticket)
 
 @app.route('/new_ticket', methods=['GET', 'POST'])
 def new_ticket():
     form = NewTicket()
-    ## ForeignKey choices
-    form.client.choices = [(c.id, c.name) for c in Client.query.order_by('name')]
-    form.employee.choices = [(u.id, u.name) for u in User.query.order_by('name')]
-    form.contract.choices = [(c.id, c.title) for c in Contract.query.order_by('title')]
+    ## form choices
+    form.client.choices = [(c.id, c.name) for c in Client.query.all()]
+    form.employee.choices = [(e.id, e.name) for e in User.query.all()]
+    form.contract.choices = [(c.id, c.title) for c in Contract.query.all()]
     if form.validate_on_submit():
-        entry = Ticket(**form.vars)
+        entry = Ticket(**form.data)
         db.session.add(entry)
         db.session.commit()
         flash("New ticket added: %s" %\
@@ -46,6 +50,10 @@ def new_ticket():
 def edit_ticket(id):
     ticket = Ticket.query.get(id)
     form = NewTicket(obj=ticket)
+    ## form choices
+    form.client.choices = [(c.id, c.name) for c in Client.query.all()]
+    form.employee.choices = [(e.id, e.name) for e in User.query.all()]
+    form.contract.choices = [(c.id, c.title) for c in Contract.query.all()]
     if form.validate_on_submit():
         Ticket.query.filter(Ticket.id==id).update(
             form.data
