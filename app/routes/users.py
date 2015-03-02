@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect, url_for
 from flask.ext.sqlalchemy import Pagination
-from app import app, db
+from app import app, db, login_manager
 from app.models.dbs import User
 from app.models.forms import RegisterUser
 from app.models.global_functions import random_password,\
     set_password
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(userid)
 
 @app.route('/users', defaults={'page':1})
 @app.route('/users/<int:page>')

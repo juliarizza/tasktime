@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container">
+	<article class="col-md-12">
+		<header>
+			<ol class="breadcrumb">
+			  <li><a href={{ url_for('index') }}>Home</a></li>
+			  <li><a href={{ url_for('show_articles') }}>Library</a></li>
+			  <li class="active">Article</li>
+			</ol>
+			<h1>{{ article.title }}<small>{{ article.author.name }}</small></h1>
+			<small>Created on: {{ article.created_on }}</small>
+		</header>
+		<div>
+			{{ article.content|safe }}
+		</div>
+	</article>
+</section>
+{% endblock %}

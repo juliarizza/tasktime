@@ -70,3 +70,11 @@ class NewTicket(Form):
 	contract = SelectField('contract',
 							validators=[DataRequired()],
 							coerce=int)
+
+class NewArticle(Form):
+	title = StringField('title', validators=[DataRequired()])
+	content = TextAreaField('content', validators=[DataRequired()])
+	attachments = FileField('attachments', validators=[Optional()])
+	author = SelectField('author',
+						validators=[DataRequired()],
+						coerce=int)

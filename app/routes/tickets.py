@@ -22,7 +22,6 @@ def show_tickets(page):
 @app.route('/ticket/<int:id>')
 def ticket_info(id):
     ticket = Ticket.query.get(id)
-    print ticket.client
     return render_template('tickets/ticket.html',
                             title='Ticket',
                             ticket=ticket)
@@ -61,7 +60,7 @@ def edit_ticket(id):
         db.session.commit()
         flash("Ticket edited: %s" %\
             form.title.data, "success")
-        return redirect('ticket', id=id)
+        return redirect(url_for('ticket_info', id=id))
     return render_template('tickets/new_ticket.html',
                             title='Edit Ticket',
                             action="edit_ticket",

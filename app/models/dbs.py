@@ -65,13 +65,14 @@ class Client(db.Model):
 
 class Article(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String)
+	title = db.Column(db.String)
 	content = db.Column(db.String)
 	attachments = db.Column(db.String)
 	author = db.Column(db.Integer, db.ForeignKey('user.id'))
+	created_on = db.Column(db.DateTime, default=datetime.datetime.now)
 
 	def __repr__(self):
-		return '<Article %r>' % self.name
+		return '<Article %r>' % self.title
 
 class Contract(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
