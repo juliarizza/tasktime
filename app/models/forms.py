@@ -2,9 +2,19 @@
 from flask.ext.wtf import Form
 from wtforms import StringField, TextAreaField,\
 	IntegerField, FloatField, FileField,\
-	SelectField
+	SelectField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Email,\
 	Optional
+
+class LoginForm(Form):
+	email = StringField('email', validators=[DataRequired()])
+	password = PasswordField('password', validators=[DataRequired()])
+	remember_me = BooleanField('remember_me')
+
+class ChangePassword(Form):
+	old_password = PasswordField('old_password', validators=[DataRequired()])
+	new_password = PasswordField('new_password', validators=[DataRequired()])
+	new_password_2 = PasswordField('new_password_2', validators=[DataRequired()])
 
 class RegisterClient(Form):
 	## user info

@@ -6,9 +6,11 @@ from app import app, db
 from app.models.dbs import Ticket, Client, \
     User, Contract
 from app.models.forms import NewTicket
+from app.models.global_functions import requires_roles
 
 @app.route('/tickets', defaults={'page':1})
 @app.route('/tickets/<int:page>')
+@requires_roles('admin', 'employee')
 def show_tickets(page):
     tickets = Ticket.query.all()
     per_page = 10

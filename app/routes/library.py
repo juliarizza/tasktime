@@ -5,6 +5,7 @@ from flask.ext.sqlalchemy import Pagination
 from app import app, db
 from app.models.dbs import Article, User
 from app.models.forms import NewArticle
+from app.models.global_functions import requires_roles
 
 @app.route('/library', defaults={'page':1})
 @app.route('/library/<int:page>')
@@ -26,6 +27,7 @@ def show_article(id):
                             article=article)
 
 @app.route('/new_article', methods=['GET', 'POST'])
+@requires_roles('admin', 'employee')
 def new_article():
     form = NewArticle()
     ## form choices
@@ -44,6 +46,7 @@ def new_article():
 
 
 @app.route('/edit_article/<int:id>', methods=['GET', 'POST'])
+@requires_roles('admin', 'employee')
 def edit_article(id):
     article = Article.query.get(id)
     form = NewArticle(obj=article)
@@ -64,6 +67,7 @@ def edit_article(id):
                             form=form)
 
 @app.route('/delete_article/<int:id>')
+@requires_roles('admin', 'employee')
 def delete_article(id):
     article = Article.query.get(id)
     db.session.delete(article)

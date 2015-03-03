@@ -4,7 +4,7 @@ from flask import Flask
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate, MigrateCommand
-from flask.ext.login import LoginManager()
+from flask.ext.login import LoginManager
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 

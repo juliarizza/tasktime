@@ -5,10 +5,11 @@ from app import app, db
 from app.models.forms import RegisterClient
 from app.models.dbs import Client
 from app.models.global_functions import random_password,\
-    set_password
+    requires_roles
 
 @app.route('/clients', defaults={'page':1})
 @app.route('/clients/<int:page>')
+@requires_roles('admin', 'employee')
 def show_clients(page):
     clients = Client.query.all()
     per_page = 10
@@ -21,6 +22,7 @@ def show_clients(page):
                             pagination=pagination)
 
 @app.route('/client/<int:id>')
+@requires_roles('admin', 'employee')
 def show_client(id):
     client = Client.query.get(id)
     return render_template('clients/client.html',
@@ -28,12 +30,13 @@ def show_client(id):
                             client=client)
 
 @app.route('/register_client', methods=['GET', 'POST'])
+@requires_roles('admin', 'employee')
 def register_client():
     form = RegisterClient()
     if form.validate_on_submit():
         password = random_password()
-        pw_hash = set_password(password)
-        entry = Client(password=pw_hash, **form.data)
+        entry = Client(**form.data)
+        entry.set_password(password)
         db.session.add(entry)
         db.session.commit()
         flash('New client on list: %s' %\
@@ -45,6 +48,7 @@ def register_client():
                            form=form)
 
 @app.route('/edit_client/<int:id>', methods=['GET', 'POST'])
+@requires_roles('admin', 'employee')
 def edit_client(id):
     client = Client.query.get(id)
     form = RegisterClient(obj=client)
@@ -62,6 +66,7 @@ def edit_client(id):
                             form=form)
 
 @app.route('/delete_client/<int:id>')
+@requires_roles('admin')
 def delete_client(id):
     client = Client.query.get(id)
     db.session.delete(client)

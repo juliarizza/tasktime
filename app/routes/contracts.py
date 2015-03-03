@@ -5,9 +5,11 @@ from flask.ext.sqlalchemy import Pagination
 from app import app, db
 from app.models.dbs import Contract
 from app.models.forms import NewContract
+from app.models.global_functions import requires_roles
 
 @app.route('/contracts', defaults={'page':1})
 @app.route('/contracts/<int:page>')
+@requires_roles('admin')
 def show_contracts(page):
     contracts = Contract.query.all()
     per_page = 10
@@ -19,6 +21,7 @@ def show_contracts(page):
                             pagination=pagination)
 
 @app.route('/new_contract', methods=['GET', 'POST'])
+@requires_roles('admin')
 def new_contract():
     form = NewContract()
     if form.validate_on_submit():
@@ -34,6 +37,7 @@ def new_contract():
                             title="New Contract")
 
 @app.route('/edit_contract/<int:id>', methods=['GET', 'POST'])
+@requires_roles('admin')
 def edit_contract(id):
     contract = Contract.query.get(id)
     form = NewContract(obj=contract)
@@ -52,6 +56,7 @@ def edit_contract(id):
                             form=form)
 
 @app.route('/delete_contract/<int:id>')
+@requires_roles('admin')
 def delete_contract(id):
     contract = Contract.query.get(id)
     db.session.delete(contract)
