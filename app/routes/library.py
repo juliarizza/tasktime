@@ -6,6 +6,7 @@ from app import app, db
 from app.models.dbs import Article, User
 from app.models.forms import NewArticle
 from app.models.global_functions import requires_roles
+from flask.ext.login import current_user
 
 @app.route('/library', defaults={'page':1})
 @app.route('/library/<int:page>')
@@ -22,7 +23,7 @@ def show_articles(page):
 
 @app.route('/article/<int:id>')
 def show_article(id):
-    article = Article.query.get(id)
+    article = Article.query.get_or_404(id)
     return render_template('library/article.html',
                             article=article)
 
@@ -31,7 +32,10 @@ def show_article(id):
 def new_article():
     form = NewArticle()
     ## form choices
-    form.author.choices = [(a.id, a.name) for a in User.query.all()]
+    form.author.choices = [(a.id, a.name) for a in \
+        User.query.filter((User.category=='employee') \
+        | (User.category=='admin')).all()]
+    form.author.default = current_user.id
     if form.validate_on_submit():
         entry = Article(**form.data)
         db.session.add(entry)
@@ -48,10 +52,13 @@ def new_article():
 @app.route('/edit_article/<int:id>', methods=['GET', 'POST'])
 @requires_roles('admin', 'employee')
 def edit_article(id):
-    article = Article.query.get(id)
+    article = Article.query.get_or_404(id)
     form = NewArticle(obj=article)
     ## form choices
-    form.author.choices = [(a.id, a.name) for a in User.query.all()]
+    form.author.choices = [(a.id, a.name) for a in \
+        User.query.filter((User.category=='employee') \
+        | (User.category=='admin')).all()]
+    form.author.default = current_user.id
     if form.validate_on_submit():
         Article.query.filter(Article.id==id).update(
             form.data
@@ -69,7 +76,7 @@ def edit_article(id):
 @app.route('/delete_article/<int:id>')
 @requires_roles('admin', 'employee')
 def delete_article(id):
-    article = Article.query.get(id)
+    article = Article.query.get_or_404(id)
     db.session.delete(article)
     db.session.commit()
     flash('Article removed: %s' % article.title, 'info')

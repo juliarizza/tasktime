@@ -39,7 +39,7 @@ def new_contract():
 @app.route('/edit_contract/<int:id>', methods=['GET', 'POST'])
 @requires_roles('admin')
 def edit_contract(id):
-    contract = Contract.query.get(id)
+    contract = Contract.query.get_or_404(id)
     form = NewContract(obj=contract)
     if form.validate_on_submit():
         Contract.query.filter(Contract.id==id).update(
@@ -58,7 +58,7 @@ def edit_contract(id):
 @app.route('/delete_contract/<int:id>')
 @requires_roles('admin')
 def delete_contract(id):
-    contract = Contract.query.get(id)
+    contract = Contract.query.get_or_404(id)
     db.session.delete(contract)
     db.session.commit()
     flash('Contract removed: %s' % contract.title, 'info')

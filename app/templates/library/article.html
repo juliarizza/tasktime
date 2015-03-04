@@ -10,8 +10,9 @@
 			  <li class="active">Article</li>
 			</ol>
 			<h1>{{ article.title }}<small>{{ article.author.name }}</small></h1>
-			<small>Created on: {{ article.created_on }}</small>
+			<small>Created on: {{ article.created_on|friendly_time }}</small>
 		</header>
+		<br>
 		<div>
 			{{ article.content|safe }}
 		</div>

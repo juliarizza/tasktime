@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for
 from flask.ext.sqlalchemy import Pagination
 from app import app, db
 from app.models.forms import RegisterClient
-from app.models.dbs import Client
+from app.models.dbs import User
 from app.models.global_functions import random_password,\
     requires_roles
 
@@ -11,7 +11,7 @@ from app.models.global_functions import random_password,\
 @app.route('/clients/<int:page>')
 @requires_roles('admin', 'employee')
 def show_clients(page):
-    clients = Client.query.all()
+    clients = User.query.filter_by(category='client').all()
     per_page = 10
     items = clients[(page-1)*per_page:per_page*page]
     pagination = Pagination(clients, page, per_page,\
@@ -24,7 +24,7 @@ def show_clients(page):
 @app.route('/client/<int:id>')
 @requires_roles('admin', 'employee')
 def show_client(id):
-    client = Client.query.get(id)
+    client = User.query.get_or_404(id)
     return render_template('clients/client.html',
                             title='Client',
                             client=client)
@@ -35,7 +35,7 @@ def register_client():
     form = RegisterClient()
     if form.validate_on_submit():
         password = random_password()
-        entry = Client(**form.data)
+        entry = User(category='client', **form.data)
         entry.set_password(password)
         db.session.add(entry)
         db.session.commit()
@@ -50,10 +50,10 @@ def register_client():
 @app.route('/edit_client/<int:id>', methods=['GET', 'POST'])
 @requires_roles('admin', 'employee')
 def edit_client(id):
-    client = Client.query.get(id)
+    client = User.query.get_or_404(id)
     form = RegisterClient(obj=client)
     if form.validate_on_submit():
-        Client.query.filter(Client.id==id).update(
+        User.query.filter_by(id=id).update(
             form.data
             )
         db.session.commit()
@@ -68,7 +68,7 @@ def edit_client(id):
 @app.route('/delete_client/<int:id>')
 @requires_roles('admin')
 def delete_client(id):
-    client = Client.query.get(id)
+    client = User.query.get_or_404(id)
     db.session.delete(client)
     db.session.commit()
     flash('Client removed: %s' % client.name, 'info')
