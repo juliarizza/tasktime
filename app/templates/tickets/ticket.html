@@ -11,34 +11,45 @@
 			</ol>
 			<h1>{{ title }}</h1>
 			<h3>Your ticket's info</h3>
+			<ul class="nav nav-tabs nav-justified" data-tabs="tabs">
+			  <li class="active"><a href="#panel1" data-toggle="tab">Ticket Info</a></li>
+			  <li><a href="#panel2" data-toggle="tab">Billing Info</a></li>
+			</ul>
 		</header>
 	</article>
-	<div class="col-md-12">
-		<p><b>Title:</b> {{ ticket.title }}</p>
-		<p><b>Description:</b> <p>{{ ticket.description }}</p>
-		<p><b>Priority:</b> {% if ticket.priority == 'high' %}
-							<span class="label label-danger">
-						{% elif ticket.priority == 'low' %}
-							<span class="label label-info">
+	<div class="col-md-12 tab-content">
+		<div class="tab-pane fade in active col-md-8" id="panel1">
+			<p><b>Title:</b> {{ ticket.title }}</p>
+			<p><b>Description:</b> <p>{{ ticket.description }}</p>
+			<p><b>Priority:</b> {% if ticket.priority == 'high' %}
+								<span class="label label-danger">
+							{% elif ticket.priority == 'low' %}
+								<span class="label label-info">
+							{% else %}
+								<span class="label label-default">
+							{% endif %}
+								{{ ticket.priority|capitalize }}
+								</span></p>
+			<p><b>Status:</b> {% if ticket.status == 'open' %}
+							<span class="label label-primary">
+						{% elif ticket.status == 'on hold' %}
+							<span class="label label-warning">
 						{% else %}
-							<span class="label label-default">
+							<span class="label label-success">
 						{% endif %}
-							{{ ticket.priority|capitalize }}
+							{{ ticket.status|capitalize }}					
 							</span></p>
-		<p><b>Status:</b> {% if ticket.status == 'open' %}
-						<span class="label label-primary">
-					{% elif ticket.status == 'on hold' %}
-						<span class="label label-warning">
-					{% else %}
-						<span class="label label-success">
-					{% endif %}
-						{{ ticket.status|capitalize }}					
-						</span></p>
-		<p><b>Start Time:</b> {{ ticket.start_time }}</p>
-		<p><b>End Time:</b> {{ ticket.end_time }}</p>
-		<p><b>Client:</b> {{ ticket.client.name }}</p>
-		<p><b>Employee:</b> {{ ticket.employee.name }}</p>
-		<p><b>Contract:</b> {{ ticket.contract.title }}</p>
+			<p><b>Start Time:</b> {{ ticket.start_time }}</p>
+			<p><b>End Time:</b> {{ ticket.end_time }}</p>
+			<p><b>Client:</b> {{ ticket.client.name }}</p>
+			<p><b>Employee:</b> {{ ticket.employee.name }}</p>
+		</div>
+		<div class="tab-pane fade" id="panel2">
+			<p><b>Contract:</b> {{ ticket.contract.title }}</p>
+			<p><b>Contract hours:</b> <span class="label label-warning">{{ ticket.contract.total_hours }}:00</span></p>
+			<p><b>Worked hours:</b> <span class="label label-info">{{ '%(hours)s:%(min)s'.format({'hours':ticket.worked_hours.hours, 'min':ticket.worked_hours.minutes}) }}</span></p>
+			<p><b>Total:</b> <span class="label label-danger">${{ ticket.contract.price_hours*ticket.worked_hours.hours+ticket.contract.price_hours*(ticket.worked_hours.minutes/60)}}</span></p>
+		</div>
 	</div>
 </section>
 {% endblock %}

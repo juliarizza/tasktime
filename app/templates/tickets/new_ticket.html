@@ -53,6 +53,7 @@
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
 		</div>
+		{% if not current_user.get_category() == 'client' %}
 		{% if form.contract.errors %}
 		<div class="form-group has-error col-md-8">
 		{% else %}
@@ -64,17 +65,17 @@
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
 		</div>
-		{% if form.client.errors %}
-		<div class="form-group has-error col-md-6">
-		{% else %}
-		<div class="form-group col-md-6">
-		{% endif %}
-			<label class="control-label">Client</label>
-			{{ form.client(class='form-control') }}
-			{% for error in form.client.errors %}
-				<small class="help-block">{{ error }}</small>
-			{% endfor %}
-		</div>
+			{% if form.client.errors %}
+			<div class="form-group has-error col-md-6">
+			{% else %}
+			<div class="form-group col-md-6">
+			{% endif %}
+				<label class="control-label">Client</label>
+				{{ form.client(class='form-control') }}
+				{% for error in form.client.errors %}
+					<small class="help-block">{{ error }}</small>
+				{% endfor %}
+			</div>
 		{% if form.employee.errors %}
 		<div class="form-group has-error col-md-6">
 		{% else %}
@@ -86,6 +87,7 @@
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
 		</div>
+		{% endif %}
 		<div class="form-group col-md-12">
 			<input type="submit" value="Submit" class="btn btn-primary">
 		</div>

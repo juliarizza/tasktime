@@ -5,8 +5,9 @@ from flask.ext.sqlalchemy import Pagination
 from flask.ext.login import login_required, current_user
 from app import app, db
 from app.models.dbs import Ticket, User, Contract
-from app.models.forms import NewTicket
+from app.models.forms import NewTicket, NewTicketClient
 from app.models.global_functions import requires_roles
+import datetime
 
 @app.route('/tickets', defaults={'page':1})
 @app.route('/tickets/<int:page>')
@@ -35,20 +36,22 @@ def ticket_info(id):
 
 @app.route('/new_ticket', methods=['GET', 'POST'])
 def new_ticket():
-    form = NewTicket()
-    ## form choices
-    form.client.choices = [(c.id, c.name) for c in \
-        User.query.filter_by(category='client').all()]
-    form.employee.choices = [(e.id, e.name) for e in \
-        User.query.filter((User.category=='employee') \
-        | (User.category=='admin')).all()]
-    form.contract.choices = [(c.id, c.title) for c in Contract.query.all()]
     if current_user.get_category() == 'client':
-        form.client.default == current_user.id        
+        form = NewTicketClient()
     else:
-        form.employee.default == current_user.id
+        form = NewTicket()
+        ## form choices
+        form.client.choices = [(c.id, c.name) for c in \
+            User.query.filter_by(category='client').all()]
+        form.employee.choices = [(e.id, e.name) for e in \
+            User.query.filter((User.category=='employee') \
+            | (User.category=='admin')).all()]
+        form.contract.choices = [(c.id, c.title) for c in Contract.query.all()]
     if form.validate_on_submit():
-        entry = Ticket(**form.data)
+        if current_user.get_category() == 'client':
+            entry = Ticket(client=current_user.id, **form.data)
+        else:
+            entry = Ticket(**form.data)
         db.session.add(entry)
         db.session.commit()
         flash("New ticket added: %s" %\
@@ -62,14 +65,17 @@ def new_ticket():
 @app.route('/edit_ticket/<int:id>', methods=['GET', 'POST'])
 def edit_ticket(id):
     ticket = Ticket.query.get_or_404(id)
-    form = NewTicket(obj=ticket)
-    ## form choices
-    form.client.choices = [(c.id, c.name) for c in \
-        User.query.filter_by(category='client').all()]
-    form.employee.choices = [(e.id, e.name) for e in \
-        User.query.filter((User.category=='employee') \
-        | (User.category=='admin')).all()]
-    form.contract.choices = [(c.id, c.title) for c in Contract.query.all()]
+    if current_user.get_category() == 'client':
+        form = NewTicketClient(obj=ticket)
+    else:
+        form = NewTicket(obj=ticket)
+        ## form choices
+        form.client.choices = [(c.id, c.name) for c in \
+            User.query.filter_by(category='client').all()]
+        form.employee.choices = [(e.id, e.name) for e in \
+            User.query.filter((User.category=='employee') \
+            | (User.category=='admin')).all()]
+        form.contract.choices = [(c.id, c.title) for c in Contract.query.all()]
     if form.validate_on_submit():
         Ticket.query.filter(Ticket.id==id).update(
             form.data
@@ -91,3 +97,59 @@ def delete_ticket(id):
     db.session.commit()
     flash('Ticket removed: %s' % ticket.title, 'info')
     return redirect(url_for('show_tickets'))
+
+@app.route('/start_ticket/<int:id>')
+@requires_roles('admin', 'employee')
+def start_ticket(id):
+    ticket = Ticket.query.get_or_404(id)
+    now = datetime.datetime.now()
+    if not ticket.start_time:
+        Ticket.query.filter_by(id=id).update(
+            {'start_time': now,
+             'play_time': now,
+             'status': 'on hold'}
+            )
+        db.session.commit()
+        flash("Started!", "success")
+    else:
+        Ticket.query.filter_by(id=id).update(
+            {'play_time': now}
+            )
+        db.session.commit()
+        flash("Keep going! :D", "success")
+    return redirect(url_for("show_tickets"))
+
+@app.route('/pause_ticket/<int:id>')
+@requires_roles('admin', 'employee')
+def pause_ticket(id):
+    ticket = Ticket.query.get_or_404(id)
+    now = datetime.datetime.now()
+    hours = now-ticket.play_time
+    Ticket.query.filter_by(id=id).update(
+        {'pause_time': now,
+         'worked_hours': ticket.worked_hours+hours}
+        )
+    db.session.commit()
+    flash("Paused!", "warning")
+    return redirect(url_for("show_tickets"))
+
+@app.route('/stop_ticket/<int:id>')
+@requires_roles('admin', 'employee')
+def stop_ticket(id):
+    ticket = Ticket.query.get_or_404(id)
+    now = datetime.datetime.now()
+    if ticket.pause_time > ticket.play_time:
+        Ticket.query.filter_by(id=id).update(
+            {'end_time': now,
+            'status': 'closed'}
+            )
+    else:
+        hours = now-ticket.play_time
+        Ticket.query.filter_by(id=id).update(
+            {'end_time': now,
+             'worked_hours': ticket.worked_hours+hours,
+             'status': 'closed'}
+            )
+    db.session.commit()
+    flash("All done!", "success")
+    return redirect(url_for("show_tickets"))

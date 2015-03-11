@@ -158,3 +158,19 @@ def profile():
     return render_template('users/user.html',
                             title="Profile",
                             user=current_user)
+
+@app.route('/preset_users')
+def preset_users():
+    if User.query.count() == 0:
+        admin_user = User(name="Admin", email="admin@admin.com", category="admin")
+        admin_user.set_password("admin")
+        employee_user = User(name="Employee", email="employee@employee.com", category="employee")
+        employee_user.set_password("employee")
+        client_user = User(name="Client", email="client@client.com", category="client")
+        client_user.set_password("client")
+        db.session.add(admin_user)
+        db.session.add(employee_user)
+        db.session.add(client_user)
+        db.session.commit()
+        flash("Preset users created!", "info")
+    return redirect(url_for('index'))

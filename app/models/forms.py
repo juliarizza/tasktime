@@ -80,6 +80,13 @@ class NewTicket(Form):
 	contract = SelectField('contract',
 							validators=[DataRequired()],
 							coerce=int)
+class NewTicketClient(Form):
+	title = StringField('title', validators=[DataRequired()])
+	description = TextAreaField('description', validators=[DataRequired()])
+	priority = SelectField('priority', 
+							choices=[('high', 'High'), ('normal', 'Normal'), ('low', 'Low')],
+							default='normal',
+							validators=[DataRequired()])
 
 class NewArticle(Form):
 	title = StringField('title', validators=[DataRequired()])

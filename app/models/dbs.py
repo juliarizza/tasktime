@@ -69,7 +69,7 @@ class Article(db.Model):
     title = db.Column(db.String)
     content = db.Column(db.String)
     attachments = db.Column(db.String)
-    author = db.Column(db.Integer, db.ForeignKey(User.id))
+    author = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_on = db.Column(db.DateTime, default=datetime.datetime.now)
 
     def __repr__(self):
@@ -99,11 +99,12 @@ class Ticket(db.Model):
         'on hold'), default='open')
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
-    client = db.Column(db.Integer, db.ForeignKey(User.id))
-    employee = db.Column(db.Integer, db.ForeignKey(User.id))
-    contract = db.Column(db.Integer, db.ForeignKey(Contract.id))
+    worked_hours = db.Column(db.Interval, default=datetime.timedelta(days=0, hours=0, minutes=0, seconds=0))
+    play_time = db.Column(db.DateTime)
+    pause_time = db.Column(db.DateTime)
+    client = db.Column(db.Integer, db.ForeignKey('users.id'))
+    employee = db.Column(db.Integer, db.ForeignKey('users.id'))
+    contract = db.Column(db.Integer, db.ForeignKey('contracts.id'))
 
     def __repr__(self):
         return '<Ticket %r>' % self.title
-    
-

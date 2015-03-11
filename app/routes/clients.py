@@ -66,7 +66,7 @@ def edit_client(id):
                             form=form)
 
 @app.route('/delete_client/<int:id>')
-@requires_roles('admin')
+@requires_roles('admin', 'employee')
 def delete_client(id):
     client = User.query.get_or_404(id)
     db.session.delete(client)

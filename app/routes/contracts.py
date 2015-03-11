@@ -9,7 +9,7 @@ from app.models.global_functions import requires_roles
 
 @app.route('/contracts', defaults={'page':1})
 @app.route('/contracts/<int:page>')
-@requires_roles('admin')
+@requires_roles('admin', 'employee')
 def show_contracts(page):
     contracts = Contract.query.all()
     per_page = 10
