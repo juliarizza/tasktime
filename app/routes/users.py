@@ -2,9 +2,11 @@
 from flask import render_template, flash, redirect,\
     url_for, g, abort
 from flask.ext.sqlalchemy import Pagination
+from flask.ext.mail import Message
 from flask.ext.login import login_required,\
     login_user, logout_user, current_user
-from app import app, db, login_manager
+from app import app, db, login_manager,\
+    config_info, mail
 from app.models.dbs import User
 from app.models.forms import RegisterUser, LoginForm,\
     ChangePassword
@@ -50,6 +52,20 @@ def register_user():
         db.session.commit()
         flash('New user on list: %s' %\
             (form.name.data), 'success')
+        msg = Message("You were registered on %s" % config_info.trade_name,
+            sender = app.config['DEFAULT_MAIL_SENDER'],
+            recipients = [form.email.data])
+        msg.html = """
+                    You were registered in the ticketing system of %(company)s 
+                    as a team member. To open new tickets and access your tickets info 
+                    use this data.<br>
+                    <b>Email:</b> %(email)s <br>
+                    <b>Password:</b> %(password)s <br>
+                    This password was generated automatically. For your safety, change 
+                    your password in your first access.
+                   """ % {'company': config_info.trade_name, 'email': form.email.data,
+                        'password': password}
+        mail.send(msg)
         return redirect(url_for('show_user', id=entry.id))
     return render_template('users/register_user.html', 
                            title='Register User',

@@ -21,13 +21,29 @@
 	{% endif %}
 	{{ form.hidden_tag() }}	
 		{% if form.title.errors %}
-		<div class="form-group has-error col-md-12">
+		<div class="form-group has-error col-md-8">
 		{% else %}
-		<div class="form-group col-md-12">
+		<div class="form-group col-md-8">
 		{% endif %}
 			<label class="control-label">Title</label>
 			{{ form.title(class='form-control', placeholder='What happened?') }}
 			{% for error in form.title.errors %}
+				<small class="help-block">{{ error }}</small>
+			{% endfor %}
+		</div>
+		{% if form.priority.errors %}
+		<div class="form-group has-error col-md-4">
+		{% else %}
+		<div class="form-group col-md-4">
+		{% endif %}
+			<label class="control-label">Priority</label>
+			<br>
+			<tr>
+			{% for subfield in form.priority %}
+		        <td class="col-md-1">{{ subfield }} {{ subfield.label }}</td>
+			{% endfor %}
+		    </tr>
+			{% for error in form.priority.errors %}
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
 		</div>
@@ -42,29 +58,7 @@
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
 		</div>
-		{% if form.priority.errors %}
-		<div class="form-group has-error col-md-4">
-		{% else %}
-		<div class="form-group col-md-4">
-		{% endif %}
-			<label class="control-label">Priority</label>
-			{{ form.priority(class='form-control') }}
-			{% for error in form.priority.errors %}
-				<small class="help-block">{{ error }}</small>
-			{% endfor %}
-		</div>
 		{% if not current_user.get_category() == 'client' %}
-		{% if form.contract.errors %}
-		<div class="form-group has-error col-md-8">
-		{% else %}
-		<div class="form-group col-md-8">
-		{% endif %}
-			<label class="control-label">Contract</label>
-			{{ form.contract(class='form-control') }}
-			{% for error in form.contract.errors %}
-				<small class="help-block">{{ error }}</small>
-			{% endfor %}
-		</div>
 			{% if form.client.errors %}
 			<div class="form-group has-error col-md-6">
 			{% else %}

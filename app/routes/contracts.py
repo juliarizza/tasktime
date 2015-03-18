@@ -3,9 +3,10 @@ from flask import render_template, flash, \
     redirect, url_for
 from flask.ext.sqlalchemy import Pagination
 from app import app, db
-from app.models.dbs import Contract
+from app.models.dbs import Contract, User
 from app.models.forms import NewContract
 from app.models.global_functions import requires_roles
+import datetime
 
 @app.route('/contracts', defaults={'page':1})
 @app.route('/contracts/<int:page>')
@@ -24,12 +25,14 @@ def show_contracts(page):
 @requires_roles('admin')
 def new_contract():
     form = NewContract()
+    form.client.choices = [(c.id, c.name) for c in User.query.filter_by(category='client').all()]
     if form.validate_on_submit():
+        form.total_hours.data = datetime.timedelta(hours=form.total_hours.data)
         entry = Contract(**form.data)
         db.session.add(entry)
         db.session.commit()
         flash("New contract added: %s" %\
-            (form.title.data), 'success')
+            (form.client.data), 'success')
         return redirect(url_for('show_contracts'))
     return render_template('contracts/new_contract.html',
                             form=form,
@@ -41,13 +44,15 @@ def new_contract():
 def edit_contract(id):
     contract = Contract.query.get_or_404(id)
     form = NewContract(obj=contract)
+    form.client.choices = [(c.id, c.name) for c in Client.query.filter_by(category='client').all()]
     if form.validate_on_submit():
+        form.total_hours.data = datetime.timedelta(hours=form.total_hours.data)
         Contract.query.filter(Contract.id==id).update(
             form.data
             )
         db.session.commit()
         flash('Contract edited: %s' %
-            (form.title.data), 'success')
+            (form.client.data), 'success')
         return redirect(url_for('show_contracts'))
     return render_template('contracts/new_contract.html',
                             title='Edit Contract',
@@ -61,5 +66,5 @@ def delete_contract(id):
     contract = Contract.query.get_or_404(id)
     db.session.delete(contract)
     db.session.commit()
-    flash('Contract removed: %s' % contract.title, 'info')
+    flash('Contract removed: %s' % contract.client.name, 'info')
     return redirect(url_for('show_contracts'))

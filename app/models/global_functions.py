@@ -19,7 +19,7 @@ def requires_roles(*roles):
     def wrapper(f):
         @wraps(f)
         def wrapped(*args, **kwargs):
-            if current_user.get_category() not in roles:
+            if not current_user.is_anonymous() and current_user.get_category() not in roles:
                 return abort(401)
             return f(*args, **kwargs)
         return wrapped

@@ -31,7 +31,7 @@
 		<div class="form-group col-md-12">
 		{% endif %}
 			<label class="control-label">Title</label>
-			{{ form.title(class='form-control', placeholder='About lost of connection') }}
+			{{ form.title(class='form-control', placeholder='Article title') }}
 			{% for error in form.title.errors %}
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}

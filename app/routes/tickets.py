@@ -30,9 +30,15 @@ def show_tickets(page):
 @app.route('/ticket/<int:id>')
 def ticket_info(id):
     ticket = Ticket.query.get_or_404(id)
+    contract = Contract.query.filter_by(client=ticket.client).first_or_404()
+    hours, remainer = divmod(ticket.worked_hours.seconds, 3600)
+    minutes, seconds = divmod(remainer, 60)
+    worked_hours = (hours, minutes, seconds)
     return render_template('tickets/ticket.html',
                             title='Ticket',
-                            ticket=ticket)
+                            ticket=ticket,
+                            contract=contract,
+                            worked_hours=worked_hours)
 
 @app.route('/new_ticket', methods=['GET', 'POST'])
 def new_ticket():
@@ -46,7 +52,6 @@ def new_ticket():
         form.employee.choices = [(e.id, e.name) for e in \
             User.query.filter((User.category=='employee') \
             | (User.category=='admin')).all()]
-        form.contract.choices = [(c.id, c.title) for c in Contract.query.all()]
     if form.validate_on_submit():
         if current_user.get_category() == 'client':
             entry = Ticket(client=current_user.id, **form.data)
@@ -75,7 +80,6 @@ def edit_ticket(id):
         form.employee.choices = [(e.id, e.name) for e in \
             User.query.filter((User.category=='employee') \
             | (User.category=='admin')).all()]
-        form.contract.choices = [(c.id, c.title) for c in Contract.query.all()]
     if form.validate_on_submit():
         Ticket.query.filter(Ticket.id==id).update(
             form.data
@@ -123,11 +127,15 @@ def start_ticket(id):
 @requires_roles('admin', 'employee')
 def pause_ticket(id):
     ticket = Ticket.query.get_or_404(id)
+    contract = Contract.query.filter_by(client=ticket.client).first_or_404()
     now = datetime.datetime.now()
     hours = now-ticket.play_time
     Ticket.query.filter_by(id=id).update(
         {'pause_time': now,
          'worked_hours': ticket.worked_hours+hours}
+        )
+    Contract.query.filter_by(client=ticket.client).update(
+        {'used_hours': contract.used_hours+hours}
         )
     db.session.commit()
     flash("Paused!", "warning")
@@ -137,8 +145,9 @@ def pause_ticket(id):
 @requires_roles('admin', 'employee')
 def stop_ticket(id):
     ticket = Ticket.query.get_or_404(id)
+    contract = Contract.query.filter_by(client=ticket.client).first_or_404()
     now = datetime.datetime.now()
-    if ticket.pause_time > ticket.play_time:
+    if ticket.pause_time and ticket.pause_time > ticket.play_time:
         Ticket.query.filter_by(id=id).update(
             {'end_time': now,
             'status': 'closed'}
@@ -149,6 +158,9 @@ def stop_ticket(id):
             {'end_time': now,
              'worked_hours': ticket.worked_hours+hours,
              'status': 'closed'}
+            )
+        Contract.query.filter_by(client=ticket.client).update(
+            {'used_hours': contract.used_hours+hours}
             )
     db.session.commit()
     flash("All done!", "success")

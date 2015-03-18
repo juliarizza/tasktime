@@ -1,10 +1,14 @@
+from app import app
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+## DATABASES
+SQLALCHEMY_DATABASE_URI = "postgresql://localhost:5432/tasktime"
 
+## WTFORMS
 WTF_CSRF_ENABLED = True
-SECRET_KEY = '19akdcsmjxn&*2304&qn,q'
 
+## APP
+SECRET_KEY = '19akdcsmjxn&*2304&qn,q'
 DEBUG = True

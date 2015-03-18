@@ -7,6 +7,7 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.login import LoginManager
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
+from flask.ext.mail import Mail
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -20,7 +21,24 @@ manager.add_command('db', MigrateCommand)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 from app.models import dbs, forms
+try:
+	config_info = dbs.Config.query.get(1)
+	app.config.update(dict(
+		MAIL_SERVER = config_info.mail_server,
+		MAIL_PORT = config_info.mail_port,
+		MAIL_USERNAME = config_info.mail_username,
+		MAIL_PASSWORD = config_info.mail_password,
+		DEFAULT_MAIL_SENDER = config_info.mail_sender,
+		MAIL_USE_TLS = False,
+		MAIL_USE_SSL= True
+		))
+except:
+	config_info = None
+
+mail = Mail(app)
+
 from app.routes import index, clients, contracts,\
 	tickets, users, library
 

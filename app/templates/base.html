@@ -68,9 +68,9 @@
 				      {% if not current_user.is_anonymous() 
 				      and current_user.get_category() == 'admin' %}
 				      <li>
-						<a >
-							<i class="glyphicon glyphicon-stats"></i>
-							<label>Reports</label>
+						<a href={{ url_for('config') }}>
+							<i class="glyphicon glyphicon-cog"></i>
+							<label>Config</label>
 						</a>
 				      </li>
 				      {% endif %}

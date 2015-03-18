@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container">
+		<aside class="col-md-12">
+			<ol class="breadcrumb row">
+			  <li><a href={{ url_for('index') }}>Home</a></li>
+			  <li class="active">{{title}}</li>
+			</ol>
+		</aside>
+		<article class="column-md-12">
+			<header>
+				<h1>{{ title }}</h1>
+			</header>
+				<form action="" method="post" name="config">
+					{{ form.hidden_tag() }}
+					<fieldset>
+						<legend>Company Info</legend>
+						{% if form.company_name.errors %}
+						<div class="form-group has-error">
+						{% else %}
+						<div class="columns form-group">
+						{% endif %}
+							<label class="control-label">Company Name:</label>
+							{{ form.company_name(class='form-control', placeholder='Legal company name') }}
+							{% for error in form.company_name.errors %}
+								<small class="help-block">{{ error }}</small>
+							{% endfor %}
+						</div>
+						{% if form.trade_name.errors %}
+						<div class="form-group has-error">
+						{% else %}
+						<div class="form-group">
+						{% endif %}
+							<label class="control-label">Trade Name:</label>
+							{{ form.trade_name(class='form-control', placeholder='Cool company name') }}
+							{% for error in form.trade_name.errors %}
+								<small class="help-block">{{ error }}</small>
+							{% endfor %}
+						</div>
+						<div class="row form-group">
+							{% if form.company_federal_id.errors %}
+							<div class="col-md-6 has-error">
+							{% else %}
+							<div class="col-md-6">
+							{% endif %}
+								<label class="control-label">Company Federal ID:</label>
+								{{ form.company_federal_id(class='form-control', placeholder='XX.XXX.XXX/YYYY-ZZ') }}
+								{% for error in form.company_federal_id.errors %}
+									<small class="help-block">{{ error }}</small>
+								{% endfor %}
+							</div>
+							{% if form.company_state_id.errors %}
+							<div class="col-md-6 has-error">
+							{% else %}
+							<div class="col-md-6">
+							{% endif %}
+								<label class="control-label">Company State ID:</label>
+								{{ form.company_state_id(class='form-control', placeholder='XXX.XXX.XXX.XXX') }}
+								{% for error in form.company_state_id.errors %}
+									<small class="help-block">{{ error }}</small>
+								{% endfor %}
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Contact Info</legend>
+						<div class="row form-group">
+							{% if form.address.errors %}
+							<div class="col-md-6 has-error">
+							{% else %}
+							<div class="col-md-6">
+							{% endif %}
+								<label class="control-label">Address:</label>
+								{{ form.address(class='form-control', placeholder='Company Street') }}
+								{% for error in form.address.errors %}
+									<small class="help-block">{{ error }}</small>
+								{% endfor %}
+							</div>
+							{% if form.number.errors %}
+							<div class="col-md-3 has-error">
+							{% else %}
+							<div class="col-md-3">
+							{% endif %}
+								<label class="control-label">Number:</label>
+								{{ form.number(class='form-control', placeholder='123') }}
+								{% for error in form.number.errors %}
+									<small class="help-block">{{ error }}</small>
+								{% endfor %}
+							</div>
+							{% if form.complement.errors %}
+							<div class="col-md-3 has-error">
+							{% else %}
+							<div class="col-md-3">
+							{% endif %}
+								<label class="control-label">Complement:</label>
+								{{ form.complement(class='form-control', placeholder='AP 000') }}
+								{% for error in form.complement.errors %}
+									<small class="help-block">{{ error }}</small>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="row form-group">
+							{% if form.zip_code.errors %}
+							<div class="col-md-3 has-error">
+							{% else %}
+							<div class="col-md-3">
+							{% endif %}
+								<label class="control-label">Zip Code:</label>
+								{{ form.zip_code(class='form-control', placeholder='XXXXXXXX') }}
+								{% for error in form.zip_code.errors %}
+									<small class="help-block">{{ error }}</small>
+								{% endfor %}
+							</div>
+							{% if form.city.errors %}
+							<div class="col-md-3 has-error">
+							{% else %}
+							<div class="col-md-3">
+							{% endif %}
+								<label class="control-label">City:</label>
+								{{ form.city(class='form-control', placeholder='City') }}
+								{% for error in form.city.errors %}
+									<small class="help-block">{{ error }}</small>
+								{% endfor %}
+							</div>
+							{% if form.state.errors %}
+							<div class="col-md-3 has-error">
+							{% else %}
+							<div class="col-md-3">
+							{% endif %}
+								<label class="control-label">State:</label>
+								{{ form.state(class='form-control', placeholder='State') }}
+								{% for error in form.state.errors %}
+									<small class="help-block">{{ error }}</small>
+								{% endfor %}
+							</div>
+							{% if form.country.errors %}
+							<div class="col-md-3 has-error">
+							{% else %}
+							<div class="col-md-3">
+							{% endif %}
+								<label class="control-label">Country:</label>
+								{{ form.country(class='form-control', placeholder='Country') }}
+								{% for error in form.country.errors %}
+									<small class="help-block">{{ error }}</small>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="row form-group">
+							{% if form.phone.errors %}
+							<div class="col-md-6 has-error">
+							{% else %}
+							<div class="col-md-6">
+							{% endif %}
+								<label class="control-label">Phone:</label>
+									{{ form.phone(class='form-control', placeholder='000999888') }}
+									{% for error in form.phone.errors %}
+										<small class="help-block">{{ error }}</small>
+									{% endfor %}
+							</div>
+							{% if form.celphone.errors %}
+							<div class="col-md-6 has-error">
+							{% else %}
+							<div class="col-md-6">
+							{% endif %}
+								<label class="control-label">Celphone:</label>
+									{{ form.celphone(class='form-control', placeholder='000999888') }}
+									{% for error in form.celphone.errors %}
+										<small class="help-block">{{ error }}</small>
+									{% endfor %}
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Mail Info</legend>
+						<div class="row form-group">
+						{% if form.mail_server.errors %}
+						<div class="col-md-10 has-error">
+						{% else %}
+						<div class="col-md-10">
+						{% endif %}
+							<label class="control-label">Server:</label>
+							{{ form.mail_server(class='form-control', placeholder='smtp.gmail.com') }}
+							{% for error in form.mail_server.errors %}
+								<small class="help-block">{{ error }}</small>
+							{% endfor %}
+						</div>
+						{% if form.mail_port.errors %}
+						<div class="col-md-2 has-error">
+						{% else %}
+						<div class="col-md-2">
+						{% endif %}
+							<label class="control-label">Port:</label>
+							{{ form.mail_port(class='form-control', placeholder='587') }}
+							{% for error in form.mail_port.errors %}
+								<small class="help-block">{{ error }}</small>
+							{% endfor %}
+						</div>
+						</div>
+						<div class="row form-group">
+						{% if form.mail_username.errors %}
+						<div class="col-md-6 has-error">
+						{% else %}
+						<div class="col-md-6">
+						{% endif %}
+							<label class="control-label">Username:</label>
+							{{ form.mail_username(class='form-control', placeholder='john') }}
+							{% for error in form.mail_username.errors %}
+								<small class="help-block">{{ error }}</small>
+							{% endfor %}
+						</div>
+						{% if form.mail_password.errors %}
+						<div class="col-md-6 has-error">
+						{% else %}
+						<div class="col-md-6">
+						{% endif %}
+							<label class="control-label">Password:</label>
+							{{ form.mail_password(class='form-control', placeholder='password') }}
+							{% for error in form.mail_password.errors %}
+								<small class="help-block">{{ error }}</small>
+							{% endfor %}
+						</div>
+						</div>
+						<div class="row form-group">
+						{% if form.mail_sender.errors %}
+						<div class="col-md-12 has-error">
+						{% else %}
+						<div class="col-md-12">
+						{% endif %}
+							<label class="control-label">Sender:</label>
+							{{ form.mail_sender(class='form-control', placeholder='john@gmail.com') }}
+							{% for error in form.mail_sender.errors %}
+								<small class="help-block">{{ error }}</small>
+							{% endfor %}
+						</div>
+						</div>
+					</fieldset>
+					<div class="row col-md-12">
+						<input type="submit" value="Submit" class="btn btn-primary">
+					</div>
+				</form>
+		</article>
+	</div>
+{% endblock %}

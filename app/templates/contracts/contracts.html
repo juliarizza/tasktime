@@ -23,22 +23,22 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Title</th>
+				<th>Client</th>
 				<th>Price/hour</th>
 				<th>Hours/period</th>
-				<th>Periods (months)</th>
-				<th>Attachment</th>
+				<th>Used Hours</th>
+				<th>Available Hours</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for contract in contracts %}
 			<tr>
-				<td>{{ contract.title }}</td>
+				<td>{{ contract.client.name }}</td>
 				<td>{{ contract.price_hour }}</td>
 				<td>{{ contract.total_hours }}</td>
-				<td>{{ contract.period }}</td>
-				<td>{{ contract.attachment }}</td>
+				<td>{{ contract.used_hours }}</td>
+				<td>{{ contract.available_hours }}</td>
 				<td>
 					<a href={{ url_for('edit_contract', id=contract.id) }}><i class="glyphicon glyphicon-pencil"></i></a>
 					<a href={{ url_for('delete_contract', id=contract.id) }}><i class="glyphicon glyphicon-trash"></i></a>
