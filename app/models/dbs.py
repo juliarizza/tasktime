@@ -44,6 +44,8 @@ class User(db.Model):
     category = db.Column(db.Enum('admin', 'employee', 'client', name='user_category'),\
         default='client')
     role = db.Column(db.String)
+    notified_80 = db.Column(db.Boolean, default=False)
+    notified_100 = db.Column(db.Boolean, default=False)
     ## company info
     company_name = db.Column(db.String) ## PT-BR: Razão Social
     trade_name = db.Column(db.String) ## PT-BR: Nome Fantasia

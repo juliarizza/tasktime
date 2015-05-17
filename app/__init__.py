@@ -42,6 +42,8 @@ mail = Mail(app)
 from app.routes import index, clients, contracts,\
 	tickets, users, library
 
+from app.models import tasks
+
 admin = Admin(app)
 admin.add_view(ModelView(dbs.User, db.session))
 admin.add_view(ModelView(dbs.Article, db.session))
