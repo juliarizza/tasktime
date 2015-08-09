@@ -21,3 +21,5 @@ sudo pip install -r requirements.txt
 python run.py runserver
 ```
 5. Abra seu navegador e acesse `http://localhost:5000`
+
+**Note:** You will have to configure your own database. In this application, we use a postgresql configuration on `config.py` file wich points to a localhost database called **tasktime**.
