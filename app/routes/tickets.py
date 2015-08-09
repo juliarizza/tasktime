@@ -95,12 +95,13 @@ def edit_ticket(id):
                             id=id,
                             form=form)
 
-@app.route('/delete_ticket/<int:id>')
-def delete_ticket(id):
-    ticket = Ticket.query.get_or_404(id)
-    db.session.delete(ticket)
+@app.route('/close_ticket/<int:id>')
+def close_ticket(id):
+    Ticket.query.filter(Ticket.id == id).update(
+        {'status': 'closed'}
+    )
     db.session.commit()
-    flash(gettext('Ticket removed: %s' % ticket.title), 'info')
+    flash(gettext('Ticket closed: %s' % ticket.title), 'info')
     return redirect(url_for('show_tickets'))
 
 @app.route('/start_ticket/<int:id>')

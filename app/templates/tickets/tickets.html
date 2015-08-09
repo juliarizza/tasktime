@@ -52,7 +52,7 @@
 					{% else %}
 						<span class="label label-success">
 					{% endif %}
-					{{ ticket.status|capitalize }}					
+					{{ ticket.status|capitalize }}
 					</span>
 				</td>
 				<td>
@@ -66,7 +66,7 @@
 					{% endif %}
 					<a href={{ url_for('ticket_info', id=ticket.id) }}><i class="glyphicon glyphicon-eye-open"></i></a>
 					<a href={{ url_for('edit_ticket', id=ticket.id) }}><i class="glyphicon glyphicon-pencil"></i></a>
-					<a href={{ url_for('delete_ticket', id=ticket.id) }}><i class="glyphicon glyphicon-trash"></i></a>
+					<a href={{ url_for('close_ticket', id=ticket.id) }}><i class=" glyphicon glyphicon-lock"></i></a>
 				</td>
 			</tr>
 			{% endfor %}

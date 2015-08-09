@@ -13,7 +13,6 @@ from flask.ext.login import current_user
 @app.route('/library/<int:page>')
 def show_articles(page):
     articles = Article.query.all()
-    print articles
     per_page = 10
     items = articles[(page-1)*per_page:per_page*page]
     pagination = Pagination(articles, page, per_page,\

@@ -7,11 +7,13 @@
 	  <li><a href={{ url_for('index') }}>{{ _('Home') }}</a></li>
 	  <li class="active">{{ _('Library') }}</li>
 	</ol>
+	{% if current_user.get_category() in ['admin', 'employee'] %}
 	<nav>
 		<ul class="nav nav-pills">
 			<li class="active"><a href={{ url_for('new_article') }}>{{ _('Add new') }}</a></li>
 		</ul>
 	</nav>
+	{% endif %}
 </aside>
 
 <section class="col-md-12">
@@ -34,9 +36,13 @@
 				<td>{{ article.title }}</td>
 				<td>{{ article.author.name }}</td>
 				<td>
+					{% if current_user.get_category() == 'admin' or current_user.id == article.author.id %}
 					<a href={{ url_for('show_article', id=article.id) }}><i class="glyphicon glyphicon-eye-open"></i></a>
 					<a href={{ url_for('edit_article', id=article.id) }}><i class="glyphicon glyphicon-pencil"></i></a>
 					<a href={{ url_for('delete_article', id=article.id) }}><i class="glyphicon glyphicon-trash"></i></a>
+					{% else %}
+					<a href={{ url_for('show_article', id=article.id) }}><i class="glyphicon glyphicon-eye-open"></i> {{ _('Read') }}</a>
+					{% endif %}
 				</td>
 			</tr>
 			{% endfor %}
