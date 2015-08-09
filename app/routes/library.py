@@ -2,6 +2,7 @@
 from flask import render_template, flash, \
     redirect, url_for
 from flask.ext.sqlalchemy import Pagination
+from flask.ext.babel import gettext
 from app import app, db
 from app.models.dbs import Article, User
 from app.models.forms import NewArticle
@@ -40,13 +41,13 @@ def new_article():
         entry = Article(**form.data)
         db.session.add(entry)
         db.session.commit()
-        flash("New article added: %s" %\
-            form.title.data, "success")
+        flash(gettext("New article added: %s" %\
+            form.title.data), "success")
         return redirect(url_for('show_articles'))
     return render_template('library/new_article.html',
                             form=form,
                             action="new_article",
-                            title="New Article")
+                            title=gettext("New Article"))
 
 
 @app.route('/edit_article/<int:id>', methods=['GET', 'POST'])
@@ -64,11 +65,11 @@ def edit_article(id):
             form.data
             )
         db.session.commit()
-        flash("Article edited: %s" %\
-            form.title.data, "success")
+        flash(gettext("Article edited: %s" %\
+            form.title.data), "success")
         return redirect(url_for('show_article', id=id))
     return render_template('library/new_article.html',
-                            title='Edit Article',
+                            title=gettext('Edit Article'),
                             action="edit_article",
                             id=id,
                             form=form)
@@ -79,5 +80,5 @@ def delete_article(id):
     article = Article.query.get_or_404(id)
     db.session.delete(article)
     db.session.commit()
-    flash('Article removed: %s' % article.title, 'info')
+    flash(gettext('Article removed: %s' % article.title), 'info')
     return redirect(url_for('show_articles'))

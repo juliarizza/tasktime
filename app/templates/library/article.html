@@ -5,12 +5,12 @@
 	<article class="col-md-12">
 		<header>
 			<ol class="breadcrumb">
-			  <li><a href={{ url_for('index') }}>Home</a></li>
-			  <li><a href={{ url_for('show_articles') }}>Library</a></li>
-			  <li class="active">Article</li>
+			  <li><a href={{ url_for('index') }}>{{ _('Home') }}</a></li>
+			  <li><a href={{ url_for('show_articles') }}>{{ _('Library') }}</a></li>
+			  <li class="active">{{ _('Article') }}</li>
 			</ol>
 			<h1>{{ article.title }}<small>{{ article.author.name }}</small></h1>
-			<small>Created on: {{ article.created_on|friendly_time }}</small>
+			<small>{{ _('Created on') }}: {{ article.created_on|friendly_time }}</small>
 		</header>
 		<br>
 		<div>

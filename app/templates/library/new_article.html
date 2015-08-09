@@ -9,15 +9,15 @@
 <div class="container">
 <aside class="col-md-12">
 	<ol class="breadcrumb">
-	  <li><a href={{ url_for('index') }}>Home</a></li>
-	  <li><a href={{ url_for('show_articles') }}>Library</a></li>
+	  <li><a href={{ url_for('index') }}>{{ _('Home') }}</a></li>
+	  <li><a href={{ url_for('show_articles') }}>{{ _('Library') }}</a></li>
 	  <li class="active">{{title}}</li>
 	</ol>
 </aside>
 <article class="col-md-12">
 	<header>
 		<h1>{{ title }}</h1>
-		<h3>New register for your library</h3>
+		<h3>{{ _('New register for your library') }}</h3>
 	</header>
 	{% if action == 'new_article' %}
 	<form action="{{ url_for(action)}}" method="post" name="newArticle">
@@ -30,8 +30,8 @@
 		{% else %}
 		<div class="form-group col-md-12">
 		{% endif %}
-			<label class="control-label">Title</label>
-			{{ form.title(class='form-control', placeholder='Article title') }}
+			<label class="control-label">{{ _('Title') }}</label>
+			{{ form.title(class='form-control', placeholder=_('Article title') ) }}
 			{% for error in form.title.errors %}
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
@@ -41,8 +41,8 @@
 		{% else %}
 		<div class="form-group col-md-12">
 		{% endif %}
-			<label class="control-label">Content</label>
-			{{ form.content(class='form-control ckeditor', placeholder="You can try this before open a ticket.") }}
+			<label class="control-label">{{ _('Content') }}</label>
+			{{ form.content(class='form-control ckeditor', placeholder=_("You can try this before open a ticket.") ) }}
 			{% for error in form.content.errors %}
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
@@ -52,9 +52,9 @@
 		{% else %}
 		<div class="form-group col-md-12">
 		{% endif %}
-			<label class="control-label">Attachments</label>
+			<label class="control-label">{{ _('Attachments') }}</label>
 			{{ form.attachments() }}
-			<small class="help-block">Do you have something usefull about this article to attach?</small>
+			<small class="help-block">{{ _('Do you have something usefull about this article to attach?') }}</small>
 			{% for error in form.attachments.errors %}
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
@@ -64,14 +64,14 @@
 		{% else %}
 		<div class="form-group col-md-12">
 		{% endif %}
-			<label class="control-label">Author</label>
+			<label class="control-label">{{ _('Author') }}</label>
 			{{ form.author(class='form-control') }}
 			{% for error in form.author.errors %}
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
 		</div>
 		<div class="form-group col-md-12">
-			<input type="submit" value="Submit" class="btn btn-primary">
+			<input type="submit" value={{ _("Submit") }} class="btn btn-primary">
 		</div>
 	</form>
 </article>

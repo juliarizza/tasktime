@@ -3,24 +3,24 @@
 {% block content %}
 <article class="container">
 	<header>
-		<h1>Welcome to TaskTime!</h1>
-		<h3>Follow this steps to set your TaskTime app and get ready to work.</h3>
+		<h1>{{ _('Welcome to TaskTime!') }}</h1>
+		<h3>{{ _('Follow this steps to set your TaskTime app and get ready to work.') }}</h3>
 	</header>
 	<div class="row"> 
 		<div class="col-md-4">
 			<article class="panel panel-danger">
 				<div class="panel-heading">
 					<header>
-						<h3 class="panel-title">Step 1: Data</h3>
+						<h3 class="panel-title">{{ _('Step 1: Data') }}</h3>
 					</header>
 				</div>
 				<div class="panel-body">
-					Register at least one of each:
+					{{ _('Register at least one of each:') }}
 					<ul>
-						<li>Client</li>
-						<li>Contract</li>
+						<li>{{ _('Client') }}</li>
+						<li>{{ _('Contract') }}</li>
 					</ul>
-					And configure your e-mail settings!
+					{{ _('And configure your e-mail settings!') }}
 				</div>
 			</article>
 		</div>
@@ -28,14 +28,14 @@
 			<article class="panel panel-warning">
 				<div class="panel-heading">
 					<header>
-						<h3 class="panel-title">Step 2: Work</h3>
+						<h3 class="panel-title">{{ _('Step 2: Work') }}</h3>
 					</header>
 				</div>
 				<div class="panel-body">
 					<ul>
-						<li>Start a ticket</li>
-						<li>Finish a ticket</li>
-						<li>See reports</li>
+						<li>{{ _('Start a ticket') }}</li>
+						<li>{{ _('Finish a ticket') }}</li>
+						<li>{{ _('See reports') }}</li>
 					</ul>
 				</div>
 			</article>
@@ -44,14 +44,14 @@
 			<article class="panel panel-success">
 				<div class="panel-heading">
 					<header>
-						<h3 class="panel-title">Step 3: Optionals</h3>
+						<h3 class="panel-title">{{ _('Step 3: Optionals') }}</h3>
 					</header>
 				</div>
 				<div class="panel-body">
 					<ul>
-						<li>Create articles in the library <small>so your clients can resolve their own problem before open a ticket</small></li>
-						<li>Add members to your team</li>
-						<li>Configure custom settings</li>
+						<li>{{ _('Create articles in the library <small>so your clients can resolve their own problem before open a ticket</small>') }}</li>
+						<li>{{ _('Add members to your team') }}</li>
+						<li>{{ _('Configure custom settings') }}</li>
 					</ul>
 				</div>
 			</article>

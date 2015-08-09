@@ -3,6 +3,7 @@ from flask import abort
 from app import app
 from werkzeug.security import check_password_hash
 from flask.ext.login import current_user
+from flask.ext.babel import gettext
 from random import choice
 from functools import wraps
 import string
@@ -28,9 +29,9 @@ def requires_roles(*roles):
 from datetime import datetime
 
 @app.template_filter('friendly_time')
-def friendly_time(dt, past_="ago", 
-    future_="from now", 
-    default="just now"):
+def friendly_time(dt, past_=gettext("ago"), 
+    future_=gettext("from now"), 
+    default=gettext("just now")):
     #code from: http://flask.pocoo.org/snippets/33/
     """
     Returns string representing "time since"
@@ -47,13 +48,13 @@ def friendly_time(dt, past_="ago",
         dt_is_past = False
 
     periods = (
-        (diff.days / 365, "year", "years"),
-        (diff.days / 30, "month", "months"),
-        (diff.days / 7, "week", "weeks"),
-        (diff.days, "day", "days"),
-        (diff.seconds / 3600, "hour", "hours"),
-        (diff.seconds / 60, "minute", "minutes"),
-        (diff.seconds, "second", "seconds"),
+        (diff.days / 365, gettext("year"), gettext("years")),
+        (diff.days / 30, gettext("month"), gettext("months")),
+        (diff.days / 7, gettext("week"), gettext("weeks")),
+        (diff.days, gettext("day"), gettext("days")),
+        (diff.seconds / 3600, gettext("hour"), gettext("hours")),
+        (diff.seconds / 60, gettext("minute"), gettext("minutes")),
+        (diff.seconds, gettext("second"), gettext("seconds")),
     )
 
     for period, singular, plural in periods:

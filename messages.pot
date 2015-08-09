@@ -1,0 +1,940 @@
+# Translations template for PROJECT.
+# Copyright (C) 2015 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2015-05-18 20:55-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+
+#: app/models/forms.py:73 app/models/forms.py:87
+msgid "High"
+msgstr ""
+
+#: app/models/forms.py:73 app/models/forms.py:87
+msgid "Normal"
+msgstr ""
+
+#: app/models/forms.py:73 app/models/forms.py:87
+msgid "Low"
+msgstr ""
+
+#: app/models/global_functions.py:32
+msgid "ago"
+msgstr ""
+
+#: app/models/global_functions.py:33
+msgid "from now"
+msgstr ""
+
+#: app/models/global_functions.py:34
+msgid "just now"
+msgstr ""
+
+#: app/models/global_functions.py:51
+msgid "year"
+msgstr ""
+
+#: app/models/global_functions.py:51
+msgid "years"
+msgstr ""
+
+#: app/models/global_functions.py:52
+msgid "month"
+msgstr ""
+
+#: app/models/global_functions.py:52
+msgid "months"
+msgstr ""
+
+#: app/models/global_functions.py:53
+msgid "week"
+msgstr ""
+
+#: app/models/global_functions.py:53
+msgid "weeks"
+msgstr ""
+
+#: app/models/global_functions.py:54
+msgid "day"
+msgstr ""
+
+#: app/models/global_functions.py:54
+msgid "days"
+msgstr ""
+
+#: app/models/global_functions.py:55
+msgid "hour"
+msgstr ""
+
+#: app/models/global_functions.py:55
+msgid "hours"
+msgstr ""
+
+#: app/models/global_functions.py:56
+msgid "minute"
+msgstr ""
+
+#: app/models/global_functions.py:56
+msgid "minutes"
+msgstr ""
+
+#: app/models/global_functions.py:57
+msgid "second"
+msgstr ""
+
+#: app/models/global_functions.py:57
+msgid "seconds"
+msgstr ""
+
+#: app/models/tasks.py:27
+#, python-format
+msgid "Atention! You only have a few hours left on %s"
+msgstr ""
+
+#: app/models/tasks.py:31
+#, python-format
+msgid "Hello %s, You used %s of the hours you had available on %s. Take care!"
+msgstr ""
+
+#: app/models/tasks.py:37
+#, python-format
+msgid "Atention! You reached the maximum hours limit on %s"
+msgstr ""
+
+#: app/models/tasks.py:41
+#, python-format
+msgid ""
+"Hello %s, You used all of your available hours on %s. From here and on "
+"you will be billed for extra hours."
+msgstr ""
+
+#: app/routes/clients.py:22 app/templates/base.html:36
+#: app/templates/clients/client.html:9 app/templates/clients/clients.html:8
+#: app/templates/clients/register_client.html:8
+msgid "Clients"
+msgstr ""
+
+#: app/routes/clients.py:31 app/routes/users.py:174 app/templates/index.html:20
+#: app/templates/clients/client.html:10
+#: app/templates/contracts/contracts.html:26
+#: app/templates/contracts/new_contract.html:50
+#: app/templates/tickets/new_ticket.html:67
+#: app/templates/tickets/ticket.html:62
+msgid "Client"
+msgstr ""
+
+#: app/routes/clients.py:45
+#, python-format
+msgid "New client on list: %s"
+msgstr ""
+
+#: app/routes/clients.py:46 app/routes/users.py:56
+#, python-format
+msgid "You were registered on %s"
+msgstr ""
+
+#: app/routes/clients.py:49
+#, python-format
+msgid ""
+"\n"
+"                    You were registered in the ticketing system of "
+"%(company)s \n"
+"                    as a client. To open new tickets and access your "
+"tickets info \n"
+"                    use this data.<br>\n"
+"                    <b>Email:</b> %(email)s <br>\n"
+"                    <b>Password:</b> %(password)s <br>\n"
+"                    This password was generated automatically. For your "
+"safety, change \n"
+"                    your password in your first access.\n"
+"                   company"
+msgstr ""
+
+#: app/routes/clients.py:62
+msgid "Register Client"
+msgstr ""
+
+#: app/routes/clients.py:76
+#, python-format
+msgid "Client edited: %s"
+msgstr ""
+
+#: app/routes/clients.py:79
+msgid "Edit Client"
+msgstr ""
+
+#: app/routes/clients.py:90
+#, python-format
+msgid "Client removed: %s"
+msgstr ""
+
+#: app/routes/contracts.py:36
+#, python-format
+msgid "New contract added: %s"
+msgstr ""
+
+#: app/routes/contracts.py:41
+msgid "New Contract"
+msgstr ""
+
+#: app/routes/contracts.py:56
+#, python-format
+msgid "Contract edited: %s"
+msgstr ""
+
+#: app/routes/contracts.py:59
+msgid "Edit Contract"
+msgstr ""
+
+#: app/routes/contracts.py:70
+#, python-format
+msgid "Contract removed: %s"
+msgstr ""
+
+#: app/routes/index.py:13 app/templates/config.html:7
+#: app/templates/clients/client.html:8 app/templates/clients/clients.html:7
+#: app/templates/clients/register_client.html:7
+#: app/templates/contracts/contracts.html:7
+#: app/templates/contracts/new_contract.html:7
+#: app/templates/library/article.html:8 app/templates/library/library.html:7
+#: app/templates/library/new_article.html:12
+#: app/templates/tickets/new_ticket.html:7 app/templates/tickets/ticket.html:8
+#: app/templates/tickets/tickets.html:7
+#: app/templates/users/register_user.html:7 app/templates/users/user.html:8
+#: app/templates/users/users.html:7
+msgid "Home"
+msgstr ""
+
+#: app/routes/index.py:38
+msgid "Updated!"
+msgstr ""
+
+#: app/routes/index.py:41 app/templates/base.html:74
+msgid "Config"
+msgstr ""
+
+#: app/routes/library.py:44
+#, python-format
+msgid "New article added: %s"
+msgstr ""
+
+#: app/routes/library.py:50
+msgid "New Article"
+msgstr ""
+
+#: app/routes/library.py:68
+#, python-format
+msgid "Article edited: %s"
+msgstr ""
+
+#: app/routes/library.py:72
+msgid "Edit Article"
+msgstr ""
+
+#: app/routes/library.py:83
+#, python-format
+msgid "Article removed: %s"
+msgstr ""
+
+#: app/routes/tickets.py:39 app/templates/tickets/ticket.html:10
+msgid "Ticket"
+msgstr ""
+
+#: app/routes/tickets.py:63
+#, python-format
+msgid "New ticket added: %s"
+msgstr ""
+
+#: app/routes/tickets.py:69
+msgid "New Ticket"
+msgstr ""
+
+#: app/routes/tickets.py:89
+#, python-format
+msgid "Ticket edited: %s"
+msgstr ""
+
+#: app/routes/tickets.py:93
+msgid "Edit Ticket"
+msgstr ""
+
+#: app/routes/tickets.py:103
+#, python-format
+msgid "Ticket removed: %s"
+msgstr ""
+
+#: app/routes/tickets.py:118
+msgid "Started!"
+msgstr ""
+
+#: app/routes/tickets.py:124
+msgid "Keep going! :D"
+msgstr ""
+
+#: app/routes/tickets.py:142
+msgid "Paused!"
+msgstr ""
+
+#: app/routes/tickets.py:167
+msgid "All done!"
+msgstr ""
+
+#: app/routes/users.py:32 app/templates/users/register_user.html:8
+#: app/templates/users/user.html:9 app/templates/users/users.html:8
+msgid "Users"
+msgstr ""
+
+#: app/routes/users.py:41 app/templates/base.html:85
+#: app/templates/users/user.html:10
+msgid "User"
+msgstr ""
+
+#: app/routes/users.py:55
+#, python-format
+msgid "New user on list: %s"
+msgstr ""
+
+#: app/routes/users.py:59
+#, python-format
+msgid ""
+"\n"
+"                    You were registered in the ticketing system of "
+"%(company)s \n"
+"                    as a team member. To open new tickets and access your"
+" tickets info \n"
+"                    use this data.<br>\n"
+"                    <b>Email:</b> %(email)s <br>\n"
+"                    <b>Password:</b> %(password)s <br>\n"
+"                    This password was generated automatically. For your "
+"safety, change \n"
+"                    your password in your first access.\n"
+"                   company"
+msgstr ""
+
+#: app/routes/users.py:72
+msgid "Register User"
+msgstr ""
+
+#: app/routes/users.py:86
+#, python-format
+msgid "User edited: %s"
+msgstr ""
+
+#: app/routes/users.py:89
+msgid "Edit User"
+msgstr ""
+
+#: app/routes/users.py:100
+#, python-format
+msgid "User removed: %s"
+msgstr ""
+
+#: app/routes/users.py:112
+msgid "Logged in!"
+msgstr ""
+
+#: app/routes/users.py:114
+msgid "Invalid login!"
+msgstr ""
+
+#: app/routes/users.py:117 app/templates/users/login.html:29
+msgid "Sign In"
+msgstr ""
+
+#: app/routes/users.py:124
+msgid "Logged out!"
+msgstr ""
+
+#: app/routes/users.py:139
+msgid "Password changed!"
+msgstr ""
+
+#: app/routes/users.py:142
+msgid "Data do not match!"
+msgstr ""
+
+#: app/routes/users.py:146 app/templates/base.html:93
+#: app/templates/users/change_password.html:11
+msgid "Change Password"
+msgstr ""
+
+#: app/routes/users.py:160
+msgid "Password reseted!"
+msgstr ""
+
+#: app/routes/users.py:163
+msgid "Passwords does not match!"
+msgstr ""
+
+#: app/routes/users.py:167
+msgid "Reset Password"
+msgstr ""
+
+#: app/routes/users.py:176 app/templates/base.html:90
+msgid "Profile"
+msgstr ""
+
+#: app/routes/users.py:192
+msgid "Preset users created!"
+msgstr ""
+
+#: app/templates/base.html:45
+msgid "Team"
+msgstr ""
+
+#: app/templates/base.html:51 app/templates/contracts/contracts.html:8
+#: app/templates/contracts/new_contract.html:8
+msgid "Contracts"
+msgstr ""
+
+#: app/templates/base.html:59 app/templates/tickets/new_ticket.html:8
+#: app/templates/tickets/ticket.html:9 app/templates/tickets/tickets.html:8
+msgid "Tickets"
+msgstr ""
+
+#: app/templates/base.html:66 app/templates/library/article.html:9
+#: app/templates/library/library.html:8
+#: app/templates/library/new_article.html:13
+msgid "Library"
+msgstr ""
+
+#: app/templates/base.html:82
+msgid "Hello"
+msgstr ""
+
+#: app/templates/base.html:88 app/templates/users/login.html:7
+msgid "Login"
+msgstr ""
+
+#: app/templates/base.html:95
+msgid "Logout"
+msgstr ""
+
+#: app/templates/config.html:18 app/templates/clients/client.html:16
+#: app/templates/clients/client.html:27
+#: app/templates/clients/register_client.html:51
+#: app/templates/users/register_user.html:64 app/templates/users/user.html:16
+#: app/templates/users/user.html:28
+msgid "Company Info"
+msgstr ""
+
+#: app/templates/config.html:24 app/templates/clients/client.html:28
+#: app/templates/clients/register_client.html:57
+#: app/templates/users/register_user.html:70 app/templates/users/user.html:29
+msgid "Company Name"
+msgstr ""
+
+#: app/templates/config.html:25 app/templates/clients/register_client.html:58
+#: app/templates/users/register_user.html:71
+msgid "Legal company name"
+msgstr ""
+
+#: app/templates/config.html:35 app/templates/clients/client.html:29
+#: app/templates/clients/register_client.html:68
+#: app/templates/users/register_user.html:81 app/templates/users/user.html:30
+msgid "Trade Name"
+msgstr ""
+
+#: app/templates/config.html:36 app/templates/clients/register_client.html:69
+#: app/templates/users/register_user.html:82
+msgid "Cool company name"
+msgstr ""
+
+#: app/templates/config.html:47 app/templates/clients/client.html:30
+#: app/templates/clients/register_client.html:80
+#: app/templates/users/register_user.html:93 app/templates/users/user.html:31
+msgid "Company Federal ID"
+msgstr ""
+
+#: app/templates/config.html:58 app/templates/clients/client.html:31
+#: app/templates/clients/register_client.html:91
+#: app/templates/users/register_user.html:104 app/templates/users/user.html:32
+msgid "Company State ID"
+msgstr ""
+
+#: app/templates/config.html:67 app/templates/clients/client.html:17
+#: app/templates/clients/client.html:34
+#: app/templates/clients/register_client.html:100
+#: app/templates/users/register_user.html:113 app/templates/users/user.html:17
+#: app/templates/users/user.html:35
+msgid "Contact Info"
+msgstr ""
+
+#: app/templates/config.html:74 app/templates/clients/client.html:35
+#: app/templates/clients/register_client.html:107
+#: app/templates/users/register_user.html:120 app/templates/users/user.html:36
+msgid "Address"
+msgstr ""
+
+#: app/templates/config.html:75 app/templates/clients/register_client.html:108
+#: app/templates/users/register_user.html:121
+msgid "Company Street"
+msgstr ""
+
+#: app/templates/config.html:85 app/templates/clients/register_client.html:118
+#: app/templates/users/register_user.html:131
+msgid "Number"
+msgstr ""
+
+#: app/templates/config.html:96 app/templates/clients/client.html:36
+#: app/templates/clients/register_client.html:129
+#: app/templates/users/register_user.html:142 app/templates/users/user.html:37
+msgid "Complement"
+msgstr ""
+
+#: app/templates/config.html:97 app/templates/clients/register_client.html:130
+#: app/templates/users/register_user.html:143
+msgid "AP 000"
+msgstr ""
+
+#: app/templates/config.html:109 app/templates/clients/client.html:37
+#: app/templates/clients/register_client.html:142
+#: app/templates/users/register_user.html:155 app/templates/users/user.html:38
+msgid "Zip Code"
+msgstr ""
+
+#: app/templates/config.html:120 app/templates/config.html:121
+#: app/templates/clients/client.html:38
+#: app/templates/clients/register_client.html:153
+#: app/templates/clients/register_client.html:154
+#: app/templates/users/register_user.html:166
+#: app/templates/users/register_user.html:167 app/templates/users/user.html:39
+msgid "City"
+msgstr ""
+
+#: app/templates/config.html:131 app/templates/config.html:132
+#: app/templates/clients/client.html:39
+#: app/templates/clients/register_client.html:164
+#: app/templates/clients/register_client.html:165
+#: app/templates/users/register_user.html:177
+#: app/templates/users/register_user.html:178 app/templates/users/user.html:40
+msgid "State"
+msgstr ""
+
+#: app/templates/config.html:142 app/templates/config.html:143
+#: app/templates/clients/client.html:40
+#: app/templates/clients/register_client.html:175
+#: app/templates/clients/register_client.html:176
+#: app/templates/users/register_user.html:188
+#: app/templates/users/register_user.html:189 app/templates/users/user.html:41
+msgid "Country"
+msgstr ""
+
+#: app/templates/config.html:155 app/templates/clients/client.html:41
+#: app/templates/clients/register_client.html:188
+#: app/templates/users/register_user.html:201 app/templates/users/user.html:42
+msgid "Phone"
+msgstr ""
+
+#: app/templates/config.html:166 app/templates/clients/client.html:42
+#: app/templates/clients/register_client.html:199
+#: app/templates/users/register_user.html:212 app/templates/users/user.html:43
+msgid "Celphone"
+msgstr ""
+
+#: app/templates/config.html:175
+msgid "Mail Info"
+msgstr ""
+
+#: app/templates/config.html:182
+msgid "Server"
+msgstr ""
+
+#: app/templates/config.html:193
+msgid "Port"
+msgstr ""
+
+#: app/templates/config.html:206
+msgid "Username"
+msgstr ""
+
+#: app/templates/config.html:217 app/templates/users/login.html:20
+#: app/templates/users/login.html:21
+msgid "Password"
+msgstr ""
+
+#: app/templates/config.html:218
+msgid "password"
+msgstr ""
+
+#: app/templates/config.html:230
+msgid "Sender"
+msgstr ""
+
+#: app/templates/config.html:239 app/templates/contracts/new_contract.html:57
+#: app/templates/library/new_article.html:74
+#: app/templates/tickets/new_ticket.html:86
+#: app/templates/users/change_password.html:32
+msgid "Submit"
+msgstr ""
+
+#: app/templates/index.html:6
+msgid "Welcome to TaskTime!"
+msgstr ""
+
+#: app/templates/index.html:7
+msgid "Follow this steps to set your TaskTime app and get ready to work."
+msgstr ""
+
+#: app/templates/index.html:14
+msgid "Step 1: Data"
+msgstr ""
+
+#: app/templates/index.html:18
+msgid "Register at least one of each:"
+msgstr ""
+
+#: app/templates/index.html:21
+msgid "Contract"
+msgstr ""
+
+#: app/templates/index.html:23
+msgid "And configure your e-mail settings!"
+msgstr ""
+
+#: app/templates/index.html:31
+msgid "Step 2: Work"
+msgstr ""
+
+#: app/templates/index.html:36
+msgid "Start a ticket"
+msgstr ""
+
+#: app/templates/index.html:37
+msgid "Finish a ticket"
+msgstr ""
+
+#: app/templates/index.html:38
+msgid "See reports"
+msgstr ""
+
+#: app/templates/index.html:47
+msgid "Step 3: Optionals"
+msgstr ""
+
+#: app/templates/index.html:52
+msgid ""
+"Create articles in the library <small>so your clients can resolve their "
+"own problem before open a ticket</small>"
+msgstr ""
+
+#: app/templates/index.html:53
+msgid "Add members to your team"
+msgstr ""
+
+#: app/templates/index.html:54
+msgid "Configure custom settings"
+msgstr ""
+
+#: app/templates/clients/client.html:13
+msgid "Your client's profile"
+msgstr ""
+
+#: app/templates/clients/client.html:15 app/templates/clients/client.html:22
+msgid "Client Info"
+msgstr ""
+
+#: app/templates/clients/client.html:23 app/templates/clients/clients.html:26
+#: app/templates/clients/register_client.html:31
+#: app/templates/users/register_user.html:31 app/templates/users/user.html:23
+#: app/templates/users/users.html:26
+msgid "Name"
+msgstr ""
+
+#: app/templates/clients/client.html:24
+#: app/templates/clients/register_client.html:42
+#: app/templates/users/login.html:14 app/templates/users/login.html:15
+#: app/templates/users/register_user.html:43 app/templates/users/user.html:24
+msgid "E-mail"
+msgstr ""
+
+#: app/templates/clients/clients.html:12
+#: app/templates/contracts/contracts.html:12
+#: app/templates/library/library.html:12 app/templates/tickets/tickets.html:12
+#: app/templates/users/users.html:12
+msgid "Add new"
+msgstr ""
+
+#: app/templates/clients/clients.html:19
+msgid "All Clients"
+msgstr ""
+
+#: app/templates/clients/clients.html:20
+msgid "Check and manage your clients"
+msgstr ""
+
+#: app/templates/clients/clients.html:27
+msgid "Company"
+msgstr ""
+
+#: app/templates/clients/clients.html:28
+#: app/templates/contracts/contracts.html:31
+#: app/templates/library/library.html:28 app/templates/tickets/tickets.html:29
+#: app/templates/users/users.html:28
+msgid "Actions"
+msgstr ""
+
+#: app/templates/clients/clients.html:49
+#: app/templates/contracts/contracts.html:54
+#: app/templates/library/library.html:49 app/templates/tickets/tickets.html:79
+#: app/templates/users/users.html:49
+msgid "Previous"
+msgstr ""
+
+#: app/templates/clients/clients.html:63
+#: app/templates/contracts/contracts.html:68
+#: app/templates/library/library.html:63 app/templates/tickets/tickets.html:93
+#: app/templates/users/users.html:63
+msgid "Next"
+msgstr ""
+
+#: app/templates/clients/clients.html:71
+msgid "Ops! No clients yet :("
+msgstr ""
+
+#: app/templates/clients/register_client.html:15
+msgid "New register for your clients list"
+msgstr ""
+
+#: app/templates/clients/register_client.html:25
+#: app/templates/users/register_user.html:25 app/templates/users/user.html:15
+#: app/templates/users/user.html:22
+msgid "User Info"
+msgstr ""
+
+#: app/templates/clients/register_client.html:208
+#: app/templates/users/register_user.html:221
+msgid "Register"
+msgstr ""
+
+#: app/templates/contracts/contracts.html:19
+msgid "All Contracts"
+msgstr ""
+
+#: app/templates/contracts/contracts.html:20
+msgid "Check and manage your contracts"
+msgstr ""
+
+#: app/templates/contracts/contracts.html:27
+msgid "Price/hour"
+msgstr ""
+
+#: app/templates/contracts/contracts.html:28
+msgid "Hours/period"
+msgstr ""
+
+#: app/templates/contracts/contracts.html:29
+msgid "Used Hours"
+msgstr ""
+
+#: app/templates/contracts/contracts.html:30
+msgid "Available Hours"
+msgstr ""
+
+#: app/templates/contracts/contracts.html:76
+msgid "Ops! No contracts yet :("
+msgstr ""
+
+#: app/templates/contracts/new_contract.html:15
+msgid "New register for your contracts list"
+msgstr ""
+
+#: app/templates/contracts/new_contract.html:28
+msgid "Price/Hour"
+msgstr ""
+
+#: app/templates/contracts/new_contract.html:39
+msgid "Total Hours per Period"
+msgstr ""
+
+#: app/templates/library/article.html:10
+msgid "Article"
+msgstr ""
+
+#: app/templates/library/article.html:13
+msgid "Created on"
+msgstr ""
+
+#: app/templates/library/library.html:19
+msgid "All Articles"
+msgstr ""
+
+#: app/templates/library/library.html:20
+msgid "Check and manage your articles"
+msgstr ""
+
+#: app/templates/library/library.html:26
+#: app/templates/library/new_article.html:33
+#: app/templates/tickets/new_ticket.html:28
+#: app/templates/tickets/ticket.html:26 app/templates/tickets/tickets.html:26
+msgid "Title"
+msgstr ""
+
+#: app/templates/library/library.html:27
+#: app/templates/library/new_article.html:67
+msgid "Author"
+msgstr ""
+
+#: app/templates/library/library.html:71
+msgid "No articles here! :("
+msgstr ""
+
+#: app/templates/library/new_article.html:20
+msgid "New register for your library"
+msgstr ""
+
+#: app/templates/library/new_article.html:34
+msgid "Article title"
+msgstr ""
+
+#: app/templates/library/new_article.html:44
+msgid "Content"
+msgstr ""
+
+#: app/templates/library/new_article.html:45
+msgid "You can try this before open a ticket."
+msgstr ""
+
+#: app/templates/library/new_article.html:55
+msgid "Attachments"
+msgstr ""
+
+#: app/templates/library/new_article.html:57
+msgid "Do you have something usefull about this article to attach?"
+msgstr ""
+
+#: app/templates/tickets/new_ticket.html:15
+msgid "New register for your tickets list"
+msgstr ""
+
+#: app/templates/tickets/new_ticket.html:29
+msgid "What happened?"
+msgstr ""
+
+#: app/templates/tickets/new_ticket.html:39
+#: app/templates/tickets/ticket.html:28 app/templates/tickets/tickets.html:27
+msgid "Priority"
+msgstr ""
+
+#: app/templates/tickets/new_ticket.html:55
+#: app/templates/tickets/ticket.html:27
+msgid "Description"
+msgstr ""
+
+#: app/templates/tickets/new_ticket.html:56
+msgid "Explain the problem."
+msgstr ""
+
+#: app/templates/tickets/new_ticket.html:78
+#: app/templates/tickets/ticket.html:63
+msgid "Employee"
+msgstr ""
+
+#: app/templates/tickets/ticket.html:13
+msgid "Your ticket's info"
+msgstr ""
+
+#: app/templates/tickets/ticket.html:15
+msgid "Ticket Info"
+msgstr ""
+
+#: app/templates/tickets/ticket.html:16
+msgid "Billing Info"
+msgstr ""
+
+#: app/templates/tickets/ticket.html:29 app/templates/tickets/tickets.html:28
+msgid "Status"
+msgstr ""
+
+#: app/templates/tickets/ticket.html:64
+msgid "Start Time"
+msgstr ""
+
+#: app/templates/tickets/ticket.html:65
+msgid "End Time"
+msgstr ""
+
+#: app/templates/tickets/ticket.html:83
+msgid "Contract Hours"
+msgstr ""
+
+#: app/templates/tickets/ticket.html:84
+msgid "Worked Hours"
+msgstr ""
+
+#: app/templates/tickets/ticket.html:85
+msgid "Total Price"
+msgstr ""
+
+#: app/templates/tickets/tickets.html:19
+msgid "All Tickets"
+msgstr ""
+
+#: app/templates/tickets/tickets.html:20
+msgid "Check and manage your tickets"
+msgstr ""
+
+#: app/templates/tickets/tickets.html:101
+msgid "Yay! You have no tickets!"
+msgstr ""
+
+#: app/templates/users/change_password.html:14
+msgid "Old Password"
+msgstr ""
+
+#: app/templates/users/change_password.html:21
+msgid "New Password"
+msgstr ""
+
+#: app/templates/users/change_password.html:27
+msgid "Repeat New Password"
+msgstr ""
+
+#: app/templates/users/login.html:8
+msgid "Sign in to your account"
+msgstr ""
+
+#: app/templates/users/login.html:26
+msgid "Remember Me"
+msgstr ""
+
+#: app/templates/users/register_user.html:15
+msgid "New register for your users list"
+msgstr ""
+
+#: app/templates/users/register_user.html:54 app/templates/users/user.html:25
+#: app/templates/users/users.html:27
+msgid "Role"
+msgstr ""
+
+#: app/templates/users/register_user.html:55
+msgid "Programmer"
+msgstr ""
+
+#: app/templates/users/user.html:13
+msgid "Your user's profile"
+msgstr ""
+
+#: app/templates/users/users.html:19
+msgid "All Users"
+msgstr ""
+
+#: app/templates/users/users.html:20
+msgid "Check and manage your users"
+msgstr ""
+
+#: app/templates/users/users.html:71
+msgid "No user here! :("
+msgstr ""
+

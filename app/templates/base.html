@@ -33,7 +33,7 @@
 				      <li>
 				      	<a href={{ url_for('show_clients') }}>
 							<i class="glyphicon glyphicon-user"></i>
-							<label>Clients</label>
+							<label>{{ _('Clients') }}</label>
 						</a>
 				      </li>
 				      {% endif %}
@@ -42,13 +42,13 @@
 				      <li>
 						<a href={{ url_for('show_users') }}>
 							<i class="glyphicon glyphicon-briefcase"></i>
-							<label>Team</label>
+							<label>{{ _('Team') }}</label>
 						</a>
 				      </li>
 				      <li>
 						<a href={{ url_for('show_contracts') }}>
 							<i class="glyphicon glyphicon-folder-open"></i>
-							<label>Contracts</label>
+							<label>{{ _('Contracts') }}</label>
 						</a>
 				      </li>
 				      {% endif %}
@@ -56,14 +56,14 @@
 				      <li>
 						<a href={{ url_for('show_tickets') }}>
 							<i class="glyphicon glyphicon-bullhorn"></i>
-							<label>Tickets</label>
+							<label>{{ _('Tickets') }}</label>
 						</a>
 				      </li>
 				      {% endif %}
 				      <li>
 						<a href={{ url_for('show_articles') }}>
 					    	<i class="glyphicon glyphicon-book"></i>
-					    	<label>Library</label>
+					    	<label>{{ _('Library') }}</label>
 						</a>
 				      </li>
 				      {% if not current_user.is_anonymous() 
@@ -71,7 +71,7 @@
 				      <li>
 						<a href={{ url_for('config') }}>
 							<i class="glyphicon glyphicon-cog"></i>
-							<label>Config</label>
+							<label>{{ _('Config') }}</label>
 						</a>
 				      </li>
 				      {% endif %}
@@ -79,20 +79,20 @@
 
 				      <ul class="nav navbar-nav navbar-right">
 				      	{% if not current_user.is_anonymous() %}
-				        <li><a>Hello, {{ current_user.name.split(" ")[0] }}!</a></li>
+				        <li><a>{{ _('Hello') }}, {{ current_user.name.split(" ")[0] }}!</a></li>
 				        {% endif %}
 				        <li class="dropdown">
-				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User <span class="caret"></span></a>
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ _('User') }} <span class="caret"></span></a>
 				          <ul class="dropdown-menu" role="menu">
 				          	{% if current_user.is_anonymous() %}
-				            <li><a href={{ url_for('login') }}>Login</a></li>
+				            <li><a href={{ url_for('login') }}>{{ _('Login') }}</a></li>
 				           	{% else %}
-				            <li><a href={{ url_for('profile', id=current_user.id) }}>Profile</a></li>
+				            <li><a href={{ url_for('profile', id=current_user.id) }}>{{ _('Profile') }}</a></li>
 				            <li><a href={{ url_for('change_password', 
 				            						category=current_user.get_category(),
-				            						id=current_user.id) }}>Change Password</a></li>
+				            						id=current_user.id) }}>{{ _('Change Password') }}</a></li>
 				            <li class="divider"></li>
-				            <li><a href={{ url_for('logout') }}>Logout</a></li>
+				            <li><a href={{ url_for('logout') }}>{{ _('Logout') }}</a></li>
 				            {% endif %}
 				          </ul>
 				        </li>

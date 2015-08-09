@@ -2,6 +2,7 @@
 from flask import render_template, flash, redirect, url_for
 from flask.ext.sqlalchemy import Pagination
 from flask.ext.mail import Message
+from flask.ext.babel import gettext
 from app import app, db, config_info, mail
 from app.models.forms import RegisterClient
 from app.models.dbs import User
@@ -18,7 +19,7 @@ def show_clients(page):
     pagination = Pagination(clients, page, per_page,\
                             len(clients), items)
     return render_template('clients/clients.html',
-                            title='Clients',
+                            title=gettext('Clients'),
                             clients=items,
                             pagination=pagination)
 
@@ -27,7 +28,7 @@ def show_clients(page):
 def show_client(id):
     client = User.query.get_or_404(id)
     return render_template('clients/client.html',
-                            title='Client',
+                            title=gettext('Client'),
                             client=client)
 
 @app.route('/register_client', methods=['GET', 'POST'])
@@ -40,12 +41,12 @@ def register_client():
         entry.set_password(password)
         db.session.add(entry)
         db.session.commit()
-        flash('New client on list: %s' %\
-            (form.name.data), 'success')
-        msg = Message("You were registered on %s" % config_info.trade_name,
+        flash(gettext('New client on list: %s' %\
+            (form.name.data), 'success'))
+        msg = Message(gettext("You were registered on %s" % config_info.trade_name,
             sender = app.config['DEFAULT_MAIL_SENDER'],
-            recipients = [form.email.data])
-        msg.html = """
+            recipients = [form.email.data]))
+        msg.html = gettext("""
                     You were registered in the ticketing system of %(company)s 
                     as a client. To open new tickets and access your tickets info 
                     use this data.<br>
@@ -54,11 +55,11 @@ def register_client():
                     This password was generated automatically. For your safety, change 
                     your password in your first access.
                    """ % {'company': config_info.trade_name, 'email': form.email.data,
-                        'password': password}
+                        'password': password})
         mail.send(msg)
         return redirect(url_for('show_client', id=entry.id))
     return render_template('clients/register_client.html', 
-                           title='Register Client',
+                           title=gettext('Register Client'),
                            action='register_client',
                            form=form)
 
@@ -72,10 +73,10 @@ def edit_client(id):
             form.data
             )
         db.session.commit()
-        flash('Client edited: %s' % form.name.data, 'success')
+        flash(gettext('Client edited: %s' % form.name.data), 'success')
         return redirect(url_for('show_clients'))
     return render_template('clients/register_client.html',
-                            title='Edit Client',
+                            title=gettext('Edit Client'),
                             action='edit_client',
                             id=id,
                             form=form)
@@ -86,5 +87,5 @@ def delete_client(id):
     client = User.query.get_or_404(id)
     db.session.delete(client)
     db.session.commit()
-    flash('Client removed: %s' % client.name, 'info')
+    flash(gettext('Client removed: %s' % client.name), 'info')
     return redirect(url_for('show_clients'))

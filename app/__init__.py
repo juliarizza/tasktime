@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 
-from flask import Flask
+from flask import Flask, request
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate, MigrateCommand
@@ -8,6 +8,7 @@ from flask.ext.login import LoginManager
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.mail import Mail
+from flask.ext.babel import Babel
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -21,6 +22,10 @@ manager.add_command('db', MigrateCommand)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+babel = Babel(app)
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
 from app.models import dbs, forms
 try:

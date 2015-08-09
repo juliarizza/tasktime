@@ -3,6 +3,7 @@ from flask import render_template, flash, \
     redirect, url_for
 from flask.ext.sqlalchemy import Pagination
 from flask.ext.login import login_required, current_user
+from flask.ext.babel import gettext
 from app import app, db
 from app.models.dbs import Ticket, User, Contract
 from app.models.forms import NewTicket, NewTicketClient
@@ -35,7 +36,7 @@ def ticket_info(id):
     minutes, seconds = divmod(remainer, 60)
     worked_hours = (hours, minutes, seconds)
     return render_template('tickets/ticket.html',
-                            title='Ticket',
+                            title=gettext('Ticket'),
                             ticket=ticket,
                             contract=contract,
                             worked_hours=worked_hours)
@@ -59,13 +60,13 @@ def new_ticket():
             entry = Ticket(**form.data)
         db.session.add(entry)
         db.session.commit()
-        flash("New ticket added: %s" %\
-            form.title.data, "success")
+        flash(gettext("New ticket added: %s" %\
+            form.title.data), "success")
         return redirect(url_for('show_tickets'))
     return render_template('tickets/new_ticket.html',
                             form=form,
                             action="new_ticket",
-                            title="New Ticket")
+                            title=gettext("New Ticket"))
 
 @app.route('/edit_ticket/<int:id>', methods=['GET', 'POST'])
 def edit_ticket(id):
@@ -85,11 +86,11 @@ def edit_ticket(id):
             form.data
             )
         db.session.commit()
-        flash("Ticket edited: %s" %\
-            form.title.data, "success")
+        flash(gettext("Ticket edited: %s" %\
+            form.title.data), "success")
         return redirect(url_for('ticket_info', id=id))
     return render_template('tickets/new_ticket.html',
-                            title='Edit Ticket',
+                            title=gettext('Edit Ticket'),
                             action="edit_ticket",
                             id=id,
                             form=form)
@@ -99,7 +100,7 @@ def delete_ticket(id):
     ticket = Ticket.query.get_or_404(id)
     db.session.delete(ticket)
     db.session.commit()
-    flash('Ticket removed: %s' % ticket.title, 'info')
+    flash(gettext('Ticket removed: %s' % ticket.title), 'info')
     return redirect(url_for('show_tickets'))
 
 @app.route('/start_ticket/<int:id>')
@@ -114,13 +115,13 @@ def start_ticket(id):
              'status': 'on hold'}
             )
         db.session.commit()
-        flash("Started!", "success")
+        flash(gettext("Started!"), "success")
     else:
         Ticket.query.filter_by(id=id).update(
             {'play_time': now}
             )
         db.session.commit()
-        flash("Keep going! :D", "success")
+        flash(gettext("Keep going! :D"), "success")
     return redirect(url_for("show_tickets"))
 
 @app.route('/pause_ticket/<int:id>')
@@ -138,7 +139,7 @@ def pause_ticket(id):
         {'used_hours': contract.used_hours+hours}
         )
     db.session.commit()
-    flash("Paused!", "warning")
+    flash(gettext("Paused!"), "warning")
     return redirect(url_for("show_tickets"))
 
 @app.route('/stop_ticket/<int:id>')
@@ -163,5 +164,5 @@ def stop_ticket(id):
             {'used_hours': contract.used_hours+hours}
             )
     db.session.commit()
-    flash("All done!", "success")
+    flash(gettext("All done!"), "success")
     return redirect(url_for("show_tickets"))

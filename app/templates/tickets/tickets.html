@@ -4,29 +4,29 @@
 <div class="container">
 <aside class="col-md-12">
 	<ol class="breadcrumb">
-	  <li><a href={{ url_for('index') }}>Home</a></li>
-	  <li class="active">Tickets</li>
+	  <li><a href={{ url_for('index') }}>{{ _('Home') }}</a></li>
+	  <li class="active">{{ _('Tickets') }}</li>
 	</ol>
 	<nav>
 		<ul class="nav nav-pills">
-			<li class="active"><a href={{ url_for('new_ticket') }}>Add new</a></li>		
+			<li class="active"><a href={{ url_for('new_ticket') }}>{{ _('Add new') }}</a></li>
 		</ul>
 	</nav>
 </aside>
 
 <section class="col-md-12">
 	<header>
-		<h1>All Tickets</h1>
-		<h3>Check and manage your tickets</h3>
+		<h1>{{ _('All Tickets') }}</h1>
+		<h3>{{ _('Check and manage your tickets') }}</h3>
 	</header>
 	{% if tickets %}
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Title</th>
-				<th>Priority</th>
-				<th>Status</th>
-				<th>Actions</th>
+				<th>{{ _('Title') }}</th>
+				<th>{{ _('Priority') }}</th>
+				<th>{{ _('Status') }}</th>
+				<th>{{ _('Actions') }}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -76,7 +76,7 @@
 	  <ul class="pagination">
 	  	{% if pagination.has_prev %}
 	    <li>
-	      <a href={{ url_for('show_tickets', page=pagination.prev_num) }} aria-label="Previous">
+	      <a href={{ url_for('show_tickets', page=pagination.prev_num) }} aria-label={{ _("Previous") }}>
 	        <span aria-hidden="true">&laquo;</span>
 	      </a>
 	    </li>
@@ -90,7 +90,7 @@
     	{% endfor %}
     	{% if pagination.has_next %}
 	    <li>
-	      <a href={{ url_for('show_tickets', page=pagination.next_num) }} aria-label="Next">
+	      <a href={{ url_for('show_tickets', page=pagination.next_num) }} aria-label={{ _("Next") }}>
 	        <span aria-hidden="true">&raquo;</span>
 	      </a>
 	    </li>
@@ -98,7 +98,7 @@
 	  </ul>
 	</nav>
 	{% else %}
-	<div class="well well-lg">Yay! You have no tickets!</div>
+	<div class="well well-lg">{{ _('Yay! You have no tickets!') }}</div>
 	{% endif %}
 </section>
 </div>

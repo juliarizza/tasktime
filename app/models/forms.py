@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
+from flask.ext.babel import gettext
 from wtforms import StringField, TextAreaField,\
     IntegerField, FloatField, FileField,\
     SelectField, PasswordField, BooleanField,\
@@ -69,7 +70,7 @@ class NewTicket(Form):
     title = StringField('title', validators=[DataRequired()])
     description = TextAreaField('description', validators=[DataRequired()])
     priority = RadioField('priority', 
-                            choices=[('high', 'High'), ('normal', 'Normal'), ('low', 'Low')],
+                            choices=[('high', gettext('High')), ('normal', gettext('Normal')), ('low', gettext('Low'))],
                             default='normal',
                             validators=[DataRequired()])
     client = SelectField('client', 
@@ -83,7 +84,7 @@ class NewTicketClient(Form):
     title = StringField('title', validators=[DataRequired()])
     description = TextAreaField('description', validators=[DataRequired()])
     priority = RadioField('priority', 
-                            choices=[('high', 'High'), ('normal', 'Normal'), ('low', 'Low')],
+                            choices=[('high', gettext('High')), ('normal', gettext('Normal')), ('low', gettext('Low'))],
                             default='normal',
                             validators=[DataRequired()])
 

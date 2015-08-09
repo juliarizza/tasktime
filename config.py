@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from app import app
 import os
 
@@ -12,3 +13,9 @@ WTF_CSRF_ENABLED = True
 ## APP
 SECRET_KEY = '19akdcsmjxn&*2304&qn,q'
 DEBUG = True
+
+## AVAILABLE LANGUAGES
+LANGUAGES = {
+    'en': 'English',
+    'pt': 'Português (Brasil)'
+}

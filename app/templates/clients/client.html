@@ -5,44 +5,43 @@
 	<article class="col-md-12">
 		<header>
 			<ol class="breadcrumb">
-			  <li><a href={{ url_for('index') }}>Home</a></li>
-			  <li><a href={{ url_for('show_clients') }}>Clients</a></li>
-			  <li class="active">Client</li>
+			  <li><a href={{ url_for('index') }}>{{ _('Home') }}</a></li>
+			  <li><a href={{ url_for('show_clients') }}>{{ _('Clients') }}</a></li>
+			  <li class="active">{{ _('Client') }}</li>
 			</ol>
 			<h1>{{ title }}</h1>
-			<h3>Your client's profile</h3>
+			<h3>{{ _("Your client's profile") }}</h3>
 			<ul class="nav nav-tabs nav-justified" data-tabs="tabs">
-			  <li class="active"><a href="#panel1" data-toggle="tab">Client Info</a></li>
-			  <li><a href="#panel2" data-toggle="tab">Company Info</a></li>
-			  <li><a href="#panel3" data-toggle="tab">Contact Info</a></li>
+			  <li class="active"><a href="#panel1" data-toggle="tab">{{ _('Client Info') }}</a></li>
+			  <li><a href="#panel2" data-toggle="tab">{{ _('Company Info') }}</a></li>
+			  <li><a href="#panel3" data-toggle="tab">{{ _('Contact Info') }}</a></li>
 			</ul>
 		</header>
 		<div class="tab-content">
 			<div class="tab-pane fade in active col-md-8" id="panel1">
-				<h4>Client Info</h4>
-				<b>Name:</b> {{ client.name }} <br>
-				<b>E-mail:</b> {{ client.email }} <br>
+				<h4>{{ _('Client Info') }}</h4>
+				<b>{{ _('Name') }}:</b> {{ client.name }} <br>
+				<b>{{ _('E-mail') }}:</b> {{ client.email }} <br>
 			</div>
 			<div class="tab-pane fade" id="panel2">
-				<h4>Company Info</h4>
-				<b>Company Name:</b> {{ client.company_name }} <br>
-				<b>Trade Name:</b> {{ client.trade_name }} <br>
-				<b>Company Federal ID:</b> {{ client.company_federal_id }} <br>
-				<b>Company State ID:</b> {{ client.company_state_id }} <br>
+				<h4>{{ _('Company Info') }}</h4>
+				<b>{{ _('Company Name') }}:</b> {{ client.company_name }} <br>
+				<b>{{ _('Trade Name') }}:</b> {{ client.trade_name }} <br>
+				<b>{{ _('Company Federal ID') }}:</b> {{ client.company_federal_id }} <br>
+				<b>{{ _('Company State ID') }}:</b> {{ client.company_state_id }} <br>
 			</div>
 			<div class="tab-pane fade" id="panel3">
-				<h4>Contact Info</h4>
-				<b>Address:</b> {{ client.address }}, {{client.number}} <br>
-				<b>Complement:</b> {{ client.complement }} <br>
-				<b>Zip Code:</b> {{ client.zip_code }} <br>
-				<b>City:</b> {{ client.city }} <br>
-				<b>State:</b> {{ client.state }} <br>
-				<b>Country:</b> {{ client.country }} <br>
-				<b>Phone:</b> {{ client.phone }}
-				<b>Celphone:</b> {{ client.celphone }}
+				<h4>{{ _('Contact Info') }}</h4>
+				<b>{{ _('Address') }}:</b> {{ client.address }}, {{client.number}} <br>
+				<b>{{ _('Complement') }}:</b> {{ client.complement }} <br>
+				<b>{{ _('Zip Code') }}:</b> {{ client.zip_code }} <br>
+				<b>{{ _('City') }}:</b> {{ client.city }} <br>
+				<b>{{ _('State') }}:</b> {{ client.state }} <br>
+				<b>{{ _('Country') }}:</b> {{ client.country }} <br>
+				<b>{{ _('Phone') }}:</b> {{ client.phone }}
+				<b>{{ _('Celphone') }}:</b> {{ client.celphone }}
 			</div>
 		</div>
 	</article>
 </section>
 {% endblock %}
-

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
 from app import manager
 
-manager.run()
+if __name__ == '__main__':
+    manager.run()

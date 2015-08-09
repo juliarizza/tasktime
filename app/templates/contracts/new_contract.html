@@ -4,15 +4,15 @@
 <div class="container">
 <aside class="col-md-12">
 	<ol class="breadcrumb">
-	  <li><a href={{ url_for('index') }}>Home</a></li>
-	  <li><a href={{ url_for('show_contracts') }}>Contracts</a></li>
+	  <li><a href={{ url_for('index') }}>{{ _('Home') }}</a></li>
+	  <li><a href={{ url_for('show_contracts') }}>{{ _('Contracts') }}</a></li>
 	  <li class="active">{{title}}</li>
 	</ol>
 </aside>
 <article class="col-md-12">
 	<header>
 		<h1>{{ title }}</h1>
-		<h3>New register for your contracts list</h3>
+		<h3>{{ _('New register for your contracts list') }}</h3>
 	</header>
 	{% if action == "new_contract" %}
 	<form action={{ url_for(action) }} method="post" name="newContract">
@@ -25,7 +25,7 @@
 		{% else %}
 		<div class="form-group col-md-3">
 		{% endif %}
-			<label class="control-label">Price/Hour</label>
+			<label class="control-label">{{ _('Price/Hour') }}</label>
 			{{ form.price_hour(class='form-control', placeholder=50.0) }}
 			{% for error in form.price_hour.errors %}
 				<small class="help-block">{{ error }}</small>
@@ -36,7 +36,7 @@
 		{% else %}
 		<div class="form-group col-md-3">
 		{% endif %}
-			<label class="control-label">Total Hours per Period</label>
+			<label class="control-label">{{ _('Total Hours per Period') }}</label>
 			{{ form.total_hours(class='form-control', placeholder=6) }}
 			{% for error in form.total_hours.errors %}
 				<small class="help-block">{{ error }}</small>
@@ -47,14 +47,14 @@
 		{% else %}
 		<div class="form-group col-md-6">
 		{% endif %}
-			<label class="control-label">Client</label>
+			<label class="control-label">{{ _('Client') }}</label>
 			{{ form.client(class='form-control') }}
 			{% for error in form.client.errors %}
 				<small class="help-block">{{ error }}</small>
 			{% endfor %}
 		</div>
 		<div class="form-group col-md-12">
-			<input type="submit" value="Submit" class="btn btn-primary">
+			<input type="submit" value={{ _("Submit") }} class="btn btn-primary">
 		</div>
 	</form>
 </article>

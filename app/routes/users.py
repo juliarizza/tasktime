@@ -5,6 +5,7 @@ from flask.ext.sqlalchemy import Pagination
 from flask.ext.mail import Message
 from flask.ext.login import login_required,\
     login_user, logout_user, current_user
+from flask.ext.babel import gettext
 from app import app, db, login_manager,\
     config_info, mail
 from app.models.dbs import User
@@ -28,7 +29,7 @@ def show_users(page):
     pagination = Pagination(users, page, per_page,\
                             len(users), items)
     return render_template('users/users.html',
-                            title='Users',
+                            title=gettext('Users'),
                             users=items,
                             pagination=pagination)
 
@@ -37,7 +38,7 @@ def show_users(page):
 def show_user(id):
     user = User.query.get_or_404(id)
     return render_template('users/user.html',
-                            title='User',
+                            title=gettext('User'),
                             user=user)
 
 @app.route('/register_user', methods=['GET', 'POST'])
@@ -50,12 +51,12 @@ def register_user():
         entry.set_password(password)
         db.session.add(entry)
         db.session.commit()
-        flash('New user on list: %s' %\
-            (form.name.data), 'success')
-        msg = Message("You were registered on %s" % config_info.trade_name,
+        flash(gettext('New user on list: %s' %\
+            (form.name.data)), 'success')
+        msg = Message(gettext("You were registered on %s" % config_info.trade_name),
             sender = app.config['DEFAULT_MAIL_SENDER'],
             recipients = [form.email.data])
-        msg.html = """
+        msg.html = gettext("""
                     You were registered in the ticketing system of %(company)s 
                     as a team member. To open new tickets and access your tickets info 
                     use this data.<br>
@@ -64,11 +65,11 @@ def register_user():
                     This password was generated automatically. For your safety, change 
                     your password in your first access.
                    """ % {'company': config_info.trade_name, 'email': form.email.data,
-                        'password': password}
+                        'password': password})
         mail.send(msg)
         return redirect(url_for('show_user', id=entry.id))
     return render_template('users/register_user.html', 
-                           title='Register User',
+                           title=gettext('Register User'),
                            action='register_user',
                            form=form)
 
@@ -82,10 +83,10 @@ def edit_user(id):
             form.data
             )
         db.session.commit()
-        flash('User edited: %s' % form.name.data, 'success')
+        flash(gettext('User edited: %s' % form.name.data), 'success')
         return redirect(url_for('show_users'))
     return render_template('users/register_user.html',
-                            title='Edit User',
+                            title=gettext('Edit User'),
                             action='edit_user',
                             id=id,
                             form=form)
@@ -96,7 +97,7 @@ def delete_user(id):
     user = User.query.get_or_404(id)
     db.session.delete(user)
     db.session.commit()
-    flash('User removed: %s' % user.name, 'info')
+    flash(gettext('User removed: %s' % user.name), 'info')
     return redirect(url_for('show_users'))
 
 @app.route("/login", methods=["GET", "POST"])
@@ -108,19 +109,19 @@ def login():
             authorized = user.check_password(form.password.data)
             if authorized:
                 login_user(user, remember=form.remember_me.data)
-                flash("Logged in!", "success")
+                flash(gettext("Logged in!"), "success")
                 return redirect(url_for('index'))
-        flash("Invalid login!", "danger")
+        flash(gettext("Invalid login!"), "danger")
         return redirect(url_for("login"))
     return render_template('users/login.html', 
-                           title='Sign In',
+                           title=gettext('Sign In'),
                            form=form)
 
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
-    flash("Logged out!", "info")
+    flash(gettext("Logged out!"), "info")
     return redirect(url_for('index'))
 
 @app.route('/change_password/<int:id>',
@@ -135,14 +136,14 @@ def change_password(id):
             and user.check_password(form.old_password.data):
             user.set_password(form.new_password.data)
             db.session.commit()
-            flash("Password changed!", "success")
+            flash(gettext("Password changed!"), "success")
             return redirect(url_for('index'))
         else:
-            flash("Data don't match!", "danger")
+            flash(gettext("Data do not match!"), "danger")
             return redirect(url_for('change_password', id=id))
 
     return render_template('users/change_password.html',
-                            title="Change Password",
+                            title=gettext("Change Password"),
                             form=form)
 
 @app.route('/reset_password/<int:id>',
@@ -156,23 +157,23 @@ def reset_password(id):
         if form.new_password.data == form.new_password_2.data:
             user.set_password(form.new_password.data)
             db.session.commit()
-            flash("Password reseted!", "success")
+            flash(gettext("Password reseted!"), "success")
             return redirect(url_for('index'))
         else:
-            flash("Passwords doesn't match!", "danger")
+            flash(gettext("Passwords does not match!"), "danger")
             return redirect(url_for('reset_password', id=id))
 
     return render_template('users/change_password.html',
-                            title="Reset Password",
+                            title=gettext("Reset Password"),
                             form=form)
 
 @app.route('/profile')
 @login_required
 def profile():
     if current_user.get_category() == 'client':
-        current_user.role = 'Client'
+        current_user.role = gettext('Client')
     return render_template('users/user.html',
-                            title="Profile",
+                            title=gettext("Profile"),
                             user=current_user)
 
 @app.route('/preset_users')
@@ -188,5 +189,5 @@ def preset_users():
         db.session.add(employee_user)
         db.session.add(client_user)
         db.session.commit()
-        flash("Preset users created!", "info")
+        flash(gettext("Preset users created!"), "info")
     return redirect(url_for('index'))

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, redirect,\
 	url_for, flash
-from app import app, db
+from flask.ext.babel import gettext
+from app import app, db, babel
 from app.models.dbs import Config
 from app.models.forms import ConfigForm
 from app.models.global_functions import requires_roles
@@ -9,7 +10,7 @@ from app.models.global_functions import requires_roles
 @app.route('/')
 def index():
 	return render_template('index.html',
-							title='Home')
+							title=gettext('Home'))
 
 @app.route('/config', methods=['GET', 'POST'])
 @requires_roles('admin')
@@ -34,8 +35,8 @@ def config():
 			MAIL_USE_TLS = False,
 			MAIL_USE_SSL= True
 			))
-		flash("Updated!", "success")
+		flash(gettext("Updated!"), "success")
 		return redirect(url_for('config'))
 	return render_template('config.html',
-							title='Config',
+							title=gettext('Config'),
 							form=form)

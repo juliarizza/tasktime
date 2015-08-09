@@ -2,6 +2,7 @@
 from flask import render_template, flash, \
     redirect, url_for
 from flask.ext.sqlalchemy import Pagination
+from flask.ext.babel import gettext
 from app import app, db
 from app.models.dbs import Contract, User
 from app.models.forms import NewContract
@@ -31,13 +32,13 @@ def new_contract():
         entry = Contract(**form.data)
         db.session.add(entry)
         db.session.commit()
-        flash("New contract added: %s" %\
-            (form.client.data), 'success')
+        flash(gettext("New contract added: %s" %\
+            (form.client.data)), 'success')
         return redirect(url_for('show_contracts'))
     return render_template('contracts/new_contract.html',
                             form=form,
                             action="new_contract",
-                            title="New Contract")
+                            title=gettext("New Contract"))
 
 @app.route('/edit_contract/<int:id>', methods=['GET', 'POST'])
 @requires_roles('admin')
@@ -51,11 +52,11 @@ def edit_contract(id):
             form.data
             )
         db.session.commit()
-        flash('Contract edited: %s' %
-            (form.client.data), 'success')
+        flash(gettext('Contract edited: %s' %
+            (form.client.data)), 'success')
         return redirect(url_for('show_contracts'))
     return render_template('contracts/new_contract.html',
-                            title='Edit Contract',
+                            title=gettext('Edit Contract'),
                             action="edit_contract",
                             id=id,
                             form=form)
@@ -66,5 +67,5 @@ def delete_contract(id):
     contract = Contract.query.get_or_404(id)
     db.session.delete(contract)
     db.session.commit()
-    flash('Contract removed: %s' % contract.client.name, 'info')
+    flash(gettext('Contract removed: %s' % contract.client.name), 'info')
     return redirect(url_for('show_contracts'))
