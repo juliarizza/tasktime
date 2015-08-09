@@ -8,6 +8,7 @@ from app.models.forms import ConfigForm
 from app.models.global_functions import requires_roles
 
 @app.route('/')
+@app.route('/index')
 def index():
 	return render_template('index.html',
 							title=gettext('Home'))

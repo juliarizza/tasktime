@@ -2,14 +2,14 @@
 
 {% block content %}
 <div class="container">
-<aside class="col-md-12">
+<aside class="col-xs-12">
 	<ol class="breadcrumb">
 	  <li><a href={{ url_for('index') }}>{{ _('Home') }}</a></li>
 	  <li><a href={{ url_for('show_users') }}>{{ _('Users') }}</a></li>
 	  <li class="active">{{title}}</li>
 	</ol>
 </aside>
-<article class="col-md-12">
+<article class="col-xs-12">
 	<header>
 		<h1>{{ title }}</h1>
 		<h3>{{ _('New register for your users list') }}</h3>
@@ -28,7 +28,7 @@
 			{% else %}
 			<div class="form-group">
 			{% endif %}
-				<label class="control-label">{{ _('Name') }}:</label> 
+				<label class="control-label">{{ _('Name') }}:</label>
 				{{ form.name(class='form-control', placeholder='John Sullivan') }}
 				{% for error in form.name.errors %}
 					<small class="help-block">{{ error }}</small>
@@ -36,9 +36,9 @@
 			</div>
 			<div class="row form-group">
 				{% if form.email.errors %}
-				<div class="col-md-6 has-error">
+				<div class="col-sm-6 col-xs-12 has-error">
 				{% else %}
-				<div class="col-md-6">
+				<div class="col-sm-6 col-xs-12">
 				{% endif %}
 				<label class="control-label">{{ _('E-mail') }}:</label>
 				{{ form.email(class='form-control', placeholder='john@email.com') }}
@@ -47,9 +47,9 @@
 				{% endfor %}
 				</div>
 				{% if form.role.errors %}
-				<div class="col-md-6 has-error">
+				<div class="col-sm-6 col-xs-12 has-error">
 				{% else %}
-				<div class="col-md-6">
+				<div class="col-sm-6 col-xs-12">
 				{% endif %}
 				<label class="control-label">{{ _('Role') }}:</label>
 				{{ form.role(class='form-control', placeholder=_('Programmer') ) }}
@@ -86,9 +86,9 @@
 			</div>
 			<div class="row form-group">
 				{% if form.company_federal_id.errors %}
-				<div class="col-md-6 has-error">
+				<div class="col-sm-6 col-xs-12 has-error">
 				{% else %}
-				<div class="col-md-6">
+				<div class="col-sm-6 col-xs-12">
 				{% endif %}
 					<label class="control-label">{{ _('Company Federal ID') }}:</label>
 					{{ form.company_federal_id(class='form-control', placeholder='XX.XXX.XXX/YYYY-ZZ') }}
@@ -97,9 +97,9 @@
 					{% endfor %}
 				</div>
 				{% if form.company_state_id.errors %}
-				<div class="col-md-6 has-error">
+				<div class="col-sm-6 col-xs-12 has-error">
 				{% else %}
-				<div class="col-md-6">
+				<div class="col-sm-6 col-xs-12">
 				{% endif %}
 					<label class="control-label">{{ _('Company State ID') }}:</label>
 					{{ form.company_state_id(class='form-control', placeholder='XXX.XXX.XXX.XXX') }}
@@ -113,9 +113,9 @@
 			<legend>{{ _('Contact Info') }}</legend>
 			<div class="row form-group">
 				{% if form.address.errors %}
-				<div class="col-md-6 has-error">
+				<div class="col-sm-6 col-xs-12 has-error">
 				{% else %}
-				<div class="col-md-6">
+				<div class="col-sm-6 col-xs-12">
 				{% endif %}
 					<label class="control-label">{{ _('Address') }}:</label>
 					{{ form.address(class='form-control', placeholder=_('Company Street') ) }}
@@ -124,9 +124,9 @@
 					{% endfor %}
 				</div>
 				{% if form.number.errors %}
-				<div class="col-md-3 has-error">
+				<div class="col-sm-3 col-xs-6 has-error">
 				{% else %}
-				<div class="col-md-3">
+				<div class="col-sm-3 col-xs-6">
 				{% endif %}
 					<label class="control-label">{{ _('Number') }}:</label>
 					{{ form.number(class='form-control', placeholder='123') }}
@@ -135,9 +135,9 @@
 					{% endfor %}
 				</div>
 				{% if form.complement.errors %}
-				<div class="col-md-3 has-error">
+				<div class="col-sm-3 col-xs-6 has-error">
 				{% else %}
-				<div class="col-md-3">
+				<div class="col-sm-3 col-xs-6">
 				{% endif %}
 					<label class="control-label">{{ _('Complement') }}:</label>
 					{{ form.complement(class='form-control', placeholder=_('AP 000') ) }}
@@ -148,9 +148,9 @@
 			</div>
 			<div class="row form-group">
 				{% if form.zip_code.errors %}
-				<div class="col-md-3 has-error">
+				<div class="col-sm-3 col-xs-6 has-error">
 				{% else %}
-				<div class="col-md-3">
+				<div class="col-sm-3 col-xs-6">
 				{% endif %}
 					<label class="control-label">{{ _('Zip Code') }}:</label>
 					{{ form.zip_code(class='form-control', placeholder='XXXXXXXX') }}
@@ -159,9 +159,9 @@
 					{% endfor %}
 				</div>
 				{% if form.city.errors %}
-				<div class="col-md-3 has-error">
+				<div class="col-sm-3 col-xs-6 has-error">
 				{% else %}
-				<div class="col-md-3">
+				<div class="col-sm-3 col-xs-6">
 				{% endif %}
 					<label class="control-label">{{ _('City') }}:</label>
 					{{ form.city(class='form-control', placeholder=_('City') ) }}
@@ -170,9 +170,9 @@
 					{% endfor %}
 				</div>
 				{% if form.state.errors %}
-				<div class="col-md-3 has-error">
+				<div class="col-sm-3 col-xs-6 has-error">
 				{% else %}
-				<div class="col-md-3">
+				<div class="col-sm-3 col-xs-6">
 				{% endif %}
 					<label class="control-label">{{ _('State') }}:</label>
 					{{ form.state(class='form-control', placeholder=_('State') ) }}
@@ -181,9 +181,9 @@
 					{% endfor %}
 				</div>
 				{% if form.country.errors %}
-				<div class="col-md-3 has-error">
+				<div class="col-sm-3 col-xs-6 has-error">
 				{% else %}
-				<div class="col-md-3">
+				<div class="col-sm-3 col-xs-6">
 				{% endif %}
 					<label class="control-label">{{ _('Country') }}:</label>
 					{{ form.country(class='form-control', placeholder=_('Country') ) }}
@@ -194,9 +194,9 @@
 			</div>
 			<div class="row form-group">
 				{% if form.phone.errors %}
-				<div class="col-md-6 has-error">
+				<div class="col-sm-6 col-xs-12 has-error">
 				{% else %}
-				<div class="col-md-6">
+				<div class="col-sm-6 col-xs-12">
 				{% endif %}
 					<label class="control-label">{{ _('Phone') }}:</label>
 						{{ form.phone(class='form-control', placeholder='000999888') }}
@@ -205,9 +205,9 @@
 						{% endfor %}
 				</div>
 				{% if form.celphone.errors %}
-				<div class="col-md-6 has-error">
+				<div class="col-sm-6 col-xs-12 has-error">
 				{% else %}
-				<div class="col-md-6">
+				<div class="col-sm-6 col-xs-12">
 				{% endif %}
 					<label class="control-label">{{ _('Celphone') }}:</label>
 						{{ form.celphone(class='form-control', placeholder='000999888') }}
@@ -217,7 +217,7 @@
 				</div>
 			</div>
 		</fieldset>
-		<div class="row col-md-12">
+		<div class="row col-xs-12">
 			<input type="submit" value={{ _("Register") }} class="btn btn-primary">
 		</div>
 	</form>

@@ -15,7 +15,7 @@
 
 	<body>
     	<header>
-    		<nav class="navbar navbar-inverse"> 
+    		<nav class="navbar navbar-inverse">
     			<div class="container-fluid">
 				    <!-- Brand and toggle get grouped for better mobile display -->
 				    <div class="navbar-header">
@@ -23,12 +23,12 @@
 				      </button>
 				      <a class="navbar-brand" href={{ url_for('index') }}>TaskTime</a>
 				    </div>
-				    
+
 				    <!-- Collect the nav links, forms, and other content for toggling -->
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      <ul class="nav navbar-nav">
-				      {% if not current_user.is_anonymous() 
-				      and (current_user.get_category() == 'admin' or 
+				      {% if not current_user.is_anonymous()
+				      and (current_user.get_category() == 'admin' or
 				      current_user.get_category() == 'employee') %}
 				      <li>
 				      	<a href={{ url_for('show_clients') }}>
@@ -37,7 +37,7 @@
 						</a>
 				      </li>
 				      {% endif %}
-				      {% if not current_user.is_anonymous() 
+				      {% if not current_user.is_anonymous()
 				      and current_user.get_category() == 'admin' %}
 				      <li>
 						<a href={{ url_for('show_users') }}>
@@ -66,7 +66,7 @@
 					    	<label>{{ _('Library') }}</label>
 						</a>
 				      </li>
-				      {% if not current_user.is_anonymous() 
+				      {% if not current_user.is_anonymous()
 				      and current_user.get_category() == 'admin' %}
 				      <li>
 						<a href={{ url_for('config') }}>
@@ -88,7 +88,7 @@
 				            <li><a href={{ url_for('login') }}>{{ _('Login') }}</a></li>
 				           	{% else %}
 				            <li><a href={{ url_for('profile', id=current_user.id) }}>{{ _('Profile') }}</a></li>
-				            <li><a href={{ url_for('change_password', 
+				            <li><a href={{ url_for('change_password',
 				            						category=current_user.get_category(),
 				            						id=current_user.id) }}>{{ _('Change Password') }}</a></li>
 				            <li class="divider"></li>

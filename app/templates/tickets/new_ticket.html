@@ -2,14 +2,14 @@
 
 {% block content %}
 <div class="container">
-<aside class="col-md-12">
+<aside class="col-xs-12">
 	<ol class="breadcrumb">
 	  <li><a href={{ url_for('index') }}>{{ _('Home') }}</a></li>
 	  <li><a href={{ url_for('show_tickets') }}>{{ _('Tickets') }}</a></li>
 	  <li class="active">{{title}}</li>
 	</ol>
 </aside>
-<article class="col-md-12">
+<article class="col-xs-12">
 	<header>
 		<h1>{{ title }}</h1>
 		<h3>{{ _('New register for your tickets list') }}</h3>
@@ -19,11 +19,11 @@
 	{% else %}
 	<form action="{{ url_for(action, id=id) }}" method="post" name="editTicket">
 	{% endif %}
-	{{ form.hidden_tag() }}	
+	{{ form.hidden_tag() }}
 		{% if form.title.errors %}
-		<div class="form-group has-error col-md-8">
+		<div class="form-group has-error col-sm-8 col-xs-12">
 		{% else %}
-		<div class="form-group col-md-8">
+		<div class="form-group col-sm-8 col-xs-12">
 		{% endif %}
 			<label class="control-label">{{ _('Title') }}</label>
 			{{ form.title(class='form-control', placeholder=_('What happened?') ) }}
@@ -32,15 +32,15 @@
 			{% endfor %}
 		</div>
 		{% if form.priority.errors %}
-		<div class="form-group has-error col-md-4">
+		<div class="form-group has-error col-sm-4 col-xs-12">
 		{% else %}
-		<div class="form-group col-md-4">
+		<div class="form-group col-sm-4 col-xs-12">
 		{% endif %}
 			<label class="control-label">{{ _('Priority') }}</label>
 			<br>
 			<tr>
 			{% for subfield in form.priority %}
-		        <td class="col-md-1">{{ subfield }} {{ subfield.label }}</td>
+		        <td class="col-sm-1 col-xs-6">{{ subfield }} {{ subfield.label }}</td>
 			{% endfor %}
 		    </tr>
 			{% for error in form.priority.errors %}
@@ -48,9 +48,9 @@
 			{% endfor %}
 		</div>
 		{% if form.description.errors %}
-		<div class="form-group has-error col-md-12">
+		<div class="form-group has-error col-xs-12">
 		{% else %}
-		<div class="form-group col-md-12">
+		<div class="form-group col-xs-12">
 		{% endif %}
 			<label class="control-label">{{ _('Description') }}</label>
 			{{ form.description(class='form-control', placeholder=_("Explain the problem.") ) }}
@@ -60,9 +60,9 @@
 		</div>
 		{% if not current_user.get_category() == 'client' %}
 			{% if form.client.errors %}
-			<div class="form-group has-error col-md-6">
+			<div class="form-group has-error col-sm-6 col-xs-12">
 			{% else %}
-			<div class="form-group col-md-6">
+			<div class="form-group col-sm-6 col-xs-12">
 			{% endif %}
 				<label class="control-label">{{ _('Client') }}</label>
 				{{ form.client(class='form-control') }}
@@ -71,9 +71,9 @@
 				{% endfor %}
 			</div>
 		{% if form.employee.errors %}
-		<div class="form-group has-error col-md-6">
+		<div class="form-group has-error col-sm-6 col-xs-12">
 		{% else %}
-		<div class="form-group col-md-6">
+		<div class="form-group col-sm-6 col-xs-12">
 		{% endif %}
 			<label class="control-label">{{ _('Employee') }}</label>
 			{{ form.employee(class='form-control') }}
@@ -82,7 +82,7 @@
 			{% endfor %}
 		</div>
 		{% endif %}
-		<div class="form-group col-md-12">
+		<div class="form-group col-xs-12">
 			<input type="submit" value={{ _("Submit") }} class="btn btn-primary">
 		</div>
 	</form>

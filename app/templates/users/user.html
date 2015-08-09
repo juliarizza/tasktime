@@ -2,7 +2,7 @@
 
 {% block content %}
 <section class="container">
-	<article class="col-md-12">
+	<article class="col-xs-12">
 		<header>
 			<ol class="breadcrumb">
 			  <li><a href={{ url_for('index') }}>{{ _('Home') }}</a></li>
@@ -18,7 +18,7 @@
 			</ul>
 		</header>
 		<div class="tab-content">
-			<div class="tab-pane fade in active col-md-8" id="panel1">
+			<div class="tab-pane fade in active col-sm-8 col-xs-12" id="panel1">
 				<h4>{{ _('User Info') }}</h4>
 				<b>{{ _('Name') }}:</b> {{ user.name }} <br>
 				<b>{{ _('E-mail') }}:</b> {{ user.email }} <br>
